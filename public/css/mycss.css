@@ -1,0 +1,204 @@
+
+/*
+    Sticky Navbar
+*/
+
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.content {
+  padding: 10px;
+}
+
+.sticky + .content {
+  padding-top: 120px;
+}
+
+
+/*
+    Navbar color
+*/
+
+
+.navbar{
+  background-color: #008888;
+}
+
+.navbar-brand{
+  color:#FDD7B4 !important;
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 0px;
+}
+.my-nav-link {
+  font-size: 16px;
+  color:white !important;
+}
+.my-nav-link:hover{
+  border-bottom: solid !important; 
+  border-color: rgb(255, 243, 173) !important;
+}
+
+.hidden{
+  display: none;
+}
+
+.hand:hover{
+  cursor: hand;
+}
+
+.hyper{
+    text-decoration: none;
+    text-decoration-color: #59B1EC;
+    color: #59B1EC;
+}
+.hyper:hover{
+    text-decoration: underline;
+    text-decoration-color: #2874A6;
+    color: darkblue;
+    cursor: hand;
+}
+
+.round{
+    border-radius: 20px;
+}
+
+.rounded-circle:hover{
+    background-color: #EBEDEF;
+    cursor: pointer;
+}
+
+/*
+*   Colors
+*/
+
+thead{
+  color:#10708E;
+}
+tbody{
+  color: #09667D;
+}
+label{
+  
+  font-size: 0.9rem !important;
+  color:#6A7489 !important;
+  font-weight: bold;
+}
+
+input, textarea{
+  border-color: #D7DCE7 !important;
+  color: #577464!important;
+  
+  
+}
+select{
+  border-color: #D7DCE7 !important;
+  color: ##577464 !important;
+  padding-top:10px 10px !important;
+
+}
+input:focus, select:focus, textarea:focus {
+
+  outline-style: none !important;
+  border-color: darkblue !important;
+  box-shadow:none !important;
+}
+
+.icon-r {
+      position: absolute;
+      right: 10px;
+      top:8px;
+      font-size: 1.0rem;
+      color:#607D8B;  
+    }
+
+.icon-l {
+      position: absolute;
+      left: 25px;
+      top:10px;
+      font-size: 16px;  
+    }
+
+/*
+*   CSS for text
+*
+*/
+
+.strong{
+  font-weight: bold;
+}
+.grey{
+  color: grey;
+}
+.teal{
+  color: #10708E;
+}
+.red{
+  color:red;
+}
+
+.light-brown{
+  color:#FAD7A0 
+}
+
+.brown{
+  color:#E66414;
+}
+
+.green{
+  color: darkgreen;
+}
+.blue{
+  color:blue;
+}
+.pink{
+  color: pink;
+}
+.micro{
+  font-size: xx-small !important;
+}
+.txt-l{
+    font-weight: normal;
+    font-size: 1.2rem;
+}
+.txt-lb{
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+.txt-m{
+    font-weight: normal;
+    font-size: 1.0rem;
+}
+.txt-mb{
+    font-weight: bold;
+    font-size: 1.0rem;
+}
+.txt-s{
+    font-weight: normal;
+    font-size: 0.8rem;
+}
+.txt-sb{
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+.my-bg-success{
+  background-color: #D4EFDF !important;
+}
+
+.my-bg-danger{
+  background-color: peachpuff !important;
+}
+
+.my-bg-info{
+  background-color: #AED6F1 !important;
+}
+.my-bg-warning{
+  background-color: #FEF9E7 !important;
+}
+
+
