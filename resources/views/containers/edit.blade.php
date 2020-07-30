@@ -1,27 +1,54 @@
 @extends ('user-base')
-@section('page-title')
-  Edit Container
-@endsection
 
-@section('searchbar')
-   @parent
-@endsection
-
-@section('page')
-
-<div class="container shadow-lg p-4 mt-4">
-
-  @if ($errors->any())
-      <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-              <li>{{ $error }}</li>
-            @endforeach
-        </ul>
+@section('page-title-section')
+<section class='page-title-section'>
+   <div class="container">
+      <div class="row no-gutters my-auto">
+         <div class="col-md-4 mr-auto">
+            <nav aria-label="breadcrumb">
+               <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="{{route('users.index')}}">Home</a></li>
+                  <li class="breadcrumb-item"><a href="{{route('containers.index')}}">Containers</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Edit</li>
+               </ol>
+           </nav>
+         </div>
+      <div class="col-md-3 offset-col-5 text-center">
+         <div class="row no-gutters">
+            <div class="col text-center">
+              <a href="{{route('containers.create')}}">
+                  <div class="icon-xl text-success"><i class="fa fa-plus-circle"></i></div>
+                  <div class="micro">New Container</div>
+               </a>
+            </div>
+            
+         </div>
       </div>
-      <br>
-    @endif
-    <form method="post" action="{{ route('containers.update', $container->id) }}">
+   </div>
+</section>
+@endsection
+
+@section('page-data-section')
+<section class="page-data-section">
+   <div class="container">
+      @if ($errors->any())
+      <div class="alert alert-danger">
+         <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+         </ul>
+      </div>
+      <br />
+      @endif
+      @php
+         $sr=1;
+      @endphp
+      <div class="row no-gutters">
+         <div class="col">
+            <div class="row no-gutters justify-content-center">
+               <div class="col-sm-8 shadow-lg p-4">
+					<form method="post" action="{{ route('containers.update', $container->id) }}">
         @csrf
         @method('PATCH')
         <div class="row no-gutters form-group">      
@@ -45,20 +72,25 @@
               
             <div class="col-sm-5">
                 <label for="carrierPhone">Carrier Phone</label>
-                <input type="text" class="form-control" name="carrierPhone" placeholder="03xxxxxxxxx" autocomplete='off' pattern='03[0-9]{9}' value='{{$container->carrierPhone}}'>
+                <input type="text" class="form-control" name="carrierPhone" placeholder="0xxxxxxxxxx" autocomplete='off' pattern='0[0-9]{10}' value='{{$container->carrierPhone}}'>
                 <div class="form-group text-center hidden p-0 m-0" id='carrier_phone_sub'></div>
 
             </div>
         </div>
         
-        <div class="row no-gutters form-group">    
+        <div class="row no-gutters">    
             <div class="col text-right">
                 <button type="submit" class="btn btn-success btn-sm">Save</button>
             </div>
         </div>
     </form>
-</div>
 
+				</div>   
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
 @endsection
 
 @section('script')

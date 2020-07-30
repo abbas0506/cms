@@ -198,8 +198,7 @@ class ConsignmentController extends Controller
 
             $consignment->receiverPic=$imageName;
         }
-
-
+        
         $consignment->save();
 
         //create log
@@ -209,7 +208,7 @@ class ConsignmentController extends Controller
         
         $log->save();
 
-        return redirect ('containers/'.$consignment->container->id);
+        return redirect ('containers/'.$consignment->container->id)->with('success','Successfully updated');
     }
 
     public function destroy($id)
@@ -232,7 +231,7 @@ class ConsignmentController extends Controller
         
         $log->save();
 
-        return redirect ('containers/'.$containerId);
+        return redirect ('containers/'.$containerId)->with('success','Successfully removed');
     }
 
     function searchByDates(Request $request){

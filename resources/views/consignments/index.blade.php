@@ -6,10 +6,18 @@
 		@method('POST')
 		<div class="row">
 			<div class="col-sm-3 my-auto">
-				From <input type="date" class="form-control" name="from" value="{{$consignments->min('created_at')->toDateString()}}"> 
+				From <input type="date" class="form-control" name="from" value="
+				@if(!$consignments->isEmpty())
+					{{$consignments->min('created_at')->toDateString()}}
+				@endif
+				"> 
 			</div>
 			<div class="col-sm-3 my-auto">
-				To <input type="date" class="form-control" name="to" value="{{$consignments->max('created_at')->toDateString()}}"> 
+				To <input type="date" class="form-control" name="to" value="
+				@if(!$consignments->isEmpty())
+					{{$consignments->max('created_at')->toDateString()}}
+				@endif
+				"> 
 			</div>
 			<div class="col-sm-2 my-auto">
 				<button type="submit" class="btn btn-sm btn-success mt-4"><i class="fas fa-search"></i></button>
@@ -49,14 +57,14 @@
 			
 		<table class="table table-striped mt-4">
 			<thead>
-				<tr class="txt-mb">
+				<tr class="strong">
 					<td>Date</td>
 					<td>Bilty No.</td>
 					<td>Consignee</td>
 					<td>Description</td>
 					<td>Amount</td>
 					<td>Delivery</td>
-					<td class="text-center"><i class="fas fa-cogs"></i></td>
+					<td class="text-center"><i class="fas fa-bars"></i></td>
 				</tr>
 			</thead>
 			<tbody>
@@ -79,11 +87,11 @@
 					<td class="hidden">{{$consignment->getStatus()}}</td>
 						<form action="{{ route('consignments.destroy', $consignment->id)}}" method="post" onsubmit="return confirm('Are you sure?')" class="p-0 m-0">
 							<td class='text-center'>
-								<a href="{{ route('consignments.show', $consignment->id)}}" class='btn btn-sm btn-info'><i class="far fa-eye"></i></a>
-								<a href="{{ route('consignments.edit', $consignment->id)}}" class='btn btn-primary btn-sm'><i class="fas fa-pencil-alt"></i></a>
+								<a href="{{ route('consignments.show', $consignment->id)}}" class='btn btn-sm btn-link text-info'><i class="far fa-eye"></i></a>
+								<a href="{{ route('consignments.edit', $consignment->id)}}" class="btn btn-sm btn-link text-success"><i class="fas fa-pencil-alt"></i></a>
 								@csrf
 								@method('DELETE')
-								<button class="btn btn-danger btn-sm" type="submit"><i class="far fa-trash-alt"></i></button>
+								<button class="btn btn-sm btn-link text-danger txt-s" type="submit"><i class="far fa-trash-alt"></i></button>
 							</td>
 						</form>
 					</tr>

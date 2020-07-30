@@ -29,13 +29,13 @@
 
 		<table class="table table-striped">
 		    <thead>
-		        <tr class="txt-mb">
+		        <tr class="strong">
 		          <td>Consignee</td>
 		          <td>Phone</td>
 		          <td>Total</td>
 		          <td>Recovered</td>
 		          <td>Due</td>
-		          <td class="text-center"><i class="fas fa-cogs"></td>
+		          <td class="text-center"><i class="fas fa-bars"></td>
 		        </tr>
 		    </thead>
 		    <tbody>
@@ -48,8 +48,8 @@
 		            <td>{{$consignee->sumOfCr()-$consignee->sumOfDb()}}</td>
 		            
 					<td class='text-center'>
-						<a href="{{route('recoveries.show', $consignee->id)}}" class='btn btn-sm btn-info'><i class="far fa-eye"></i></a>
-						<a href="#" class='btn btn-sm btn-danger'><i class="fas fa-history"></i></a>
+						<a href="{{route('recoveries.show', $consignee->id)}}" class='btn btn-sm btn-link text-info'><i class="far fa-eye"></i></a>
+						<a href="#" class='btn btn-sm btn-link text-danger'><i class="fas fa-history"></i></a>
 		            	
 					</td>
 					

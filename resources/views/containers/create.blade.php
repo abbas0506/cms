@@ -1,30 +1,54 @@
 @extends ('user-base')
-@section('page-title','New Container')
 
-@section('searchbar')
-  <span class="teal">* fields are necessary</span>
-@endsection
-
-@section('toolbar')
+@section('page-title-section')
+<section class='page-title-section'>
+   <div class="container">
+      <div class="row no-gutters my-auto">
+         <div class="col-md-4 mr-auto">
+            <nav aria-label="breadcrumb">
+               <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="{{route('users.index')}}">Home</a></li>
+                  <li class="breadcrumb-item"><a href="{{route('containers.index')}}">Containers</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">New</li>
+               </ol>
+           </nav>
+         </div>
       
+   </div>
+</section>
 @endsection
 
-@section('page')
-
-<div class="container shadow-lg p-4 mt-4">
-
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        <br />
-    @endif
+@section('page-data-section')
+<section class="page-data-section">
+   <div class="container">
+      @if ($errors->any())
+      <div class="alert alert-danger">
+         <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+         </ul>
+      </div>
+      <br />
+      @elseif(session('success'))
+      <script type="text/javascript">
+	      Swal.fire({
+	          icon: 'success',
+	          text: "{{session('success')}}",
+	          showConfirmButton: false,
+	          timer:2000
+	        });
+      	</script>
     
-    <form method="post" action="{{ route('containers.store') }}">
+      @endif
+      @php
+         $sr=1;
+      @endphp
+      <div class="row no-gutters">
+         <div class="col">
+            <div class="row no-gutters justify-content-center">
+               <div class="col-sm-8 shadow-lg p-4">
+               <form method="post" action="{{ route('containers.store') }}">
         @csrf
         <div class="row no-gutters form-group">    
             
@@ -54,7 +78,7 @@
               
             <div class="col-sm-5">
                 <label for="carrierPhone">Carrier Phone</label>
-                <input type="text" class="form-control" name="carrierPhone" placeholder="03xxxxxxxxx" autocomplete='off' pattern='03[0-9]{9}'>
+                <input type="text" class="form-control" name="carrierPhone" placeholder="0xxxxxxxxxx" autocomplete='off' pattern='0[0-9]{10}'>
                 <div class="form-group text-center hidden p-0 m-0" id='carrier_phone_sub'></div>
 
             </div>
@@ -67,11 +91,35 @@
         </div>
           
     </form>
+				</div>   
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+@endsection
+
+@section('page-data-section')
+
+<div class="container shadow-lg p-4 mt-4">
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        <br />
+    @endif
+    
+    
 </div>
 
 @endsection
 
-@section('create-modal')
+@section('modal-section')
   
 <!----------------------------------------------------------------------------
                                 create modal
@@ -101,7 +149,7 @@
 
                     <div class="col-sm-4 pr-2">
                         <label for="phone">Phone *</label>
-                        <input type="text" class="form-control" id="forwarder_phone" autocomplete='off' pattern='03[0-9]{9}' placeholder="03xxxxxxxxx" required>
+                        <input type="text" class="form-control" id="forwarder_phone" autocomplete='off' pattern='0[0-9]{10}' placeholder="0xxxxxxxxxx" required>
                         <div class="txt-s text-center" id='forwarder_phone_sub'>
                     
                         </div>

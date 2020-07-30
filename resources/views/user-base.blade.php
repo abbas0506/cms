@@ -22,72 +22,31 @@
 
 </head>
 <body>
-	
-  <div class="" id='stickyheader'>
-  <!------------------------------------------------------------- 
-                                  navbar 
-  -------------------------------------------------------------->
-  <nav class="navbar navbar-expand-lg navbar-light">
-    
-    <img src="{{asset('uploads')}}/logo_transparent.png" style='width:50px;  height: 50px;' class="rounded-circle p-0 m-0">
-
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-    
-    <div class="collapse navbar-collapse pl-4" id="navbarText">
-      <ul class="navbar-nav mr-auto">
-        
-        <li class="nav-item">
-          <a class="nav-link my-nav-link" href="{{route('containers.index')}}">Containers</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link my-nav-link" href="{{route('consignments.index')}}">Consignments</a>
-        </li>
-        
-        <li class="nav-item">
-          <a class="nav-link my-nav-link" href="{{route('recoveries.index')}}">Recovery</a>
-        </li>
-        
-        <li class="nav-item">
-          <a class="nav-link my-nav-link" href="#">Reports</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link my-nav-link" href="{{route('changePassword')}}">Change Password</a>
-        </li>
-      </ul>
-      <span class="navbar-text">
-        <span class="txt-s text-light">Welcome, {{session('id')}} !</span>
-        <a href="{{route('signout')}}"><i class="fa fa-sign-out-alt pl-2 light-brown"></i></a>
-      </span>
-    </div>
-  </nav>
-
-  <!------------------------------------------------------------- 
-                                  title bar 
-  -------------------------------------------------------------->
+	<header>
+    <nav class="navbar navbar-expand-lg bg-dark navbar-light">
+      <div class="container">
+        <a class="navbar-brand" href="#">ITTEFAQ <small>Goods Transport</small></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" aria-expanded="false">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <div class="border-right pr-1 strong">{{session('id')}} !</div>
+            </li>
+            <li class="nav-item">
+              <div class="text-muted ml-1"><a href="{{route('signout')}}">Signout</a></div>
+            </li>
+          </ul>
+        </div> 
+      </div> 
+    </nav>
+  </header>
   
-  <div class="row no-gutters border-bottom p-2">
-    <div class="col-sm-4 my-auto pl-2 txt-lb">
-       @yield('page-title') 
-      <i class="fas fa-caret-right pl-2"></i>
-    </div>
-    <div class="col-sm-6 my-auto"> @yield('searchbar') </div>
-    <div class="col-sm-2 my-auto"> @yield('toolbar')   </div> 
-  </div>
-	
-  
-</div>
-  <!------------------------------------------------------------- 
-                                  page content 
-  -------------------------------------------------------------->
-  <div class="container w-75 content">
-		
-		  @yield('page')
-		
-	</div>
-  @yield('create-modal')
-  	
+  @yield('page-title-section')
+  @yield('page-data-section')
+  @yield('modal-section')
   @yield('script')
+
 </body>
 </html>

@@ -65,7 +65,7 @@
 
 			<table class="table table-striped">
 				<thead>
-					<tr class="txt-mb">
+					<tr class="strong">
 						<td>Sr</td>
 						<td>Date</td>
 						<td>Description</td>
@@ -121,12 +121,12 @@
 
 			<table class="table table-striped">
 				<thead>
-					<tr class="txt-mb">
+					<tr class="strong border-0">
 						<td>Sr</td>
 						<td>Date</td>
 						<td>Description</td>
 						<td>Amount</td>
-						<td class="text-center"><i class="fas fa-cogs"></i></td>
+						<td class="text-center"><i class="fas fa-bars"></i></td>
 					</tr>
 				</thead>
 				<tbody>
@@ -138,10 +138,10 @@
 						<td>{{$recovery->amount}}</td>
 						<form action="{{ route('recoveries.destroy', $recovery->id)}}" method="post" onsubmit="return confirm('Are you sure?')" class="p-0 m-0">
 							<td class='text-center'>
-								<a href="{{route('recoveries.edit',$recovery->id)}}" class='btn btn-primary btn-sm'><i class="fas fa-pencil-alt"></i></a>
+								<a href="{{route('recoveries.edit',$recovery->id)}}" class='btn btn-sm btn-link text-primary'><i class="fas fa-pencil-alt"></i></a>
 								@csrf
 								@method('DELETE')
-								<button class="btn btn-danger btn-sm" type="submit"><i class="far fa-trash-alt"></i></button>
+								<button class="btn btn-sm btn-link text-danger btn-sm" type="submit"><i class="far fa-trash-alt"></i></button>
 							</td>
 						</form>
 					</tr>
@@ -158,14 +158,14 @@
 				   
 			<table class="table table-striped">
 				<thead>
-					<tr class="txt-mb">
+					<tr class="strong">
 						<td>Sr</td>
 						<td>Date</td>
 						<td>Bilty No.</td>
 						<td>Description</td>
 						<td>Delivery</td>
 						<td>Amount</td>
-						<td class="text-center"><i class="fas fa-cogs"></i></td>
+						<td class="text-center"><i class="fas fa-bars"></i></td>
 					</tr>
 				</thead>
 				<tbody>
@@ -187,10 +187,10 @@
 						<td>{{$consignment->getTotal()}}</td>
 						<form action="{{ route('consignments.destroy', $consignment->id)}}" method="post" onsubmit="return confirm('Are you sure?')" class="p-0 m-0">
 							<td class='text-center'>
-								<a href="{{ route('consignments.edit', $consignment->id)}}" class='btn btn-primary btn-sm'><i class="fas fa-pencil-alt"></i></a>
+								<a href="{{ route('consignments.edit', $consignment->id)}}" class='btn btn-sm btn-link text-primary btn-sm'><i class="fas fa-pencil-alt"></i></a>
 								@csrf
 								@method('DELETE')
-								<button class="btn btn-danger btn-sm" type="submit"><i class="far fa-trash-alt"></i></button>
+								<button class="btn btn-sm btn-link text-danger btn-sm" type="submit"><i class="far fa-trash-alt"></i></button>
 							</td>
 						</form>
 					</tr>

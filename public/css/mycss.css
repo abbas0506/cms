@@ -20,27 +20,91 @@
 
 
 /*
+Table
+*/
+
+thead{
+  color:#10708E;
+  font-size: 12px;
+  border: none !important;
+  
+}
+
+table tbody tr td{
+  /*color: #09667D;*/
+  font-size: 12px;
+  vertical-align: middle !important;
+  padding-top: 3px!important;
+  padding-bottom: 3px!important;
+  }
+
+.form-group{
+  margin-bottom: 0.8rem;
+}
+
+/*
     Navbar color
 */
 
-
-.navbar{
-  background-color: #008888;
+header .navbar{
+ background: linear-gradient(to right, #076445 0%, #f5f8f8 100%); 
+ /* -webkit-box-shadow: 0 5px 80px -10px rgba(0, 0, 0, 0.5); */
+ /* box-shadow: 0 5px 80px -10px rgba(91, 218, 207, 0.815);*/
 }
-
-.navbar-brand{
-  color:#FDD7B4 !important;
-  font-size: 20px;
-  font-weight: bold;
-  letter-spacing: 0px;
-}
-.my-nav-link {
+header .navbar-brand{
+  color:#ffffff !important;
+  font-size: 22px;
+  font-weight: bolder;
+  letter-spacing: 2px;  
+  }
+header .nav-link {
   font-size: 16px;
-  color:white !important;
+  color:#17756a !important;
 }
-.my-nav-link:hover{
+header .nav-link:hover{
   border-bottom: solid !important; 
-  border-color: rgb(255, 243, 173) !important;
+  border-color: #17756a !important;
+}
+header .navbar-nav{
+  margin-left: auto;
+}
+
+.nav-tabs{
+  border-width: thin;
+  border-color:#8a98a5;
+}
+
+
+.nav-tabs .nav-link.active{
+  border-color: #b7c1cc #b2bccc transparent;
+  font-weight: bold;
+  
+}
+
+.nav-link:hover{
+  background-color: #e8ebf1;
+ 
+}
+
+header .user{
+  color: rgb(26, 127, 153);
+  font-size: 12px;
+}
+
+header .signout{
+  color: grey;
+  font-size: 12px;
+}
+
+.page-title-section, .page-data-section{
+  margin-top: 20px;
+}
+
+.page-data-section .tip{
+  margin-top: 40px !important;
+  font-size: small;
+  color:#4a505f !important;
+  
 }
 
 .hidden{
@@ -76,9 +140,7 @@
 *   Colors
 */
 
-thead{
-  color:#10708E;
-}
+
 tbody{
   color: #09667D;
 }
@@ -97,7 +159,7 @@ input, textarea{
 }
 select{
   border-color: #D7DCE7 !important;
-  color: ##577464 !important;
+  color: #577464 !important;
   padding-top:10px 10px !important;
 
 }
@@ -108,25 +170,60 @@ input:focus, select:focus, textarea:focus {
   box-shadow:none !important;
 }
 
+/*
+* bread crumb
+*/
+.breadcrumb{
+  background: transparent;
+  font-size:0.8rem !important;
+}
+.breadcrumb li a{
+  color:blue;
+}
+/*
+* icons
+*/
 .icon-r {
       position: absolute;
-      right: 10px;
-      top:8px;
+      right: -8px;
+      top:5px;
       font-size: 1.0rem;
       color:#607D8B;  
     }
+.icon-r-in{
+      position: absolute;
+      right: 40px;
+      top:5px;
+      font-size: 1.0rem;
+      color:#607D8B;  
+}
 
 .icon-l {
       position: absolute;
-      left: 25px;
+      left:25px;
       top:10px;
-      font-size: 16px;  
+      font-size: 16px; 
+      color:#607D8B; 
+    }
+
+.icon-xl{
+      font-size: 20px !important;
+    }
+.icon-lg{
+      font-size: 20px !important;
+    }
+.icon-md{
+      font-size: 15px !important;
     }
 
 /*
 *   CSS for text
 *
 */
+
+.micro{
+  font-size: 10px !important;
+}
 
 .strong{
   font-weight: bold;

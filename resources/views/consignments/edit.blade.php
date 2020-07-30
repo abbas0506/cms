@@ -1,32 +1,46 @@
 
 @extends ('user-base')
-@section('page-title','Edit Consignment')
-
-@section('searchbar')
-    
-    <span class="teal strong"> 
-        <i class="fas fa-truck"></i> &nbsp {{$consignment->container->vehicleNo}} &nbsp &nbsp 
-        <i class="far fa-user"></i> &nbsp {{$consignment->container->carrierName}} &nbsp &nbsp 
-        <i class="far fa-clock"></i> &nbsp {{$consignment->container->created_at}}  
-    </span>       
-   
+@section('page-title-section')
+<section class='page-title-section'>
+   <div class="container">
+      <div class="row no-gutters my-auto">
+         <div class="col mr-auto">
+            <nav aria-label="breadcrumb">
+               <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="{{route('users.index')}}">Home</a></li>
+                  <li class="breadcrumb-item"><a href="{{route('containers.index')}}">Containers</a></li>
+                  <li class="breadcrumb-item"><a href="{{route('containers.show', $consignment->container->id)}}">{{$consignment->container->vehicleNo}}</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Edit Consignment</li>
+               </ol>
+            </nav>
+        </div>
+    </div>
+</section>
 @endsection
 
-@section('page')
 
-<div class="container border-0 p-4 mt-4 shadow-lg">
-    
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
+@section('page-data-section')
+
+<section class="page-data-section">
+   <div class="container">
+      @if ($errors->any())
+      <div class="alert alert-danger">
+         <ul>
             @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
+            <li>{{ $error }}</li>
             @endforeach
-        </ul>
-        </div>
-        <br />
-    @endif
-        <form method="post" action="{{ route('consignments.update', $consignment->id) }}" enctype="multipart/form-data">
+         </ul>
+      </div>
+      <br />
+     @endif
+      @php
+         $sr=1;
+      @endphp
+      <div class="row no-gutters">
+         <div class="col">
+            <div class="row no-gutters justify-content-center">
+               <div class="col-sm-11 shadow-lg p-4">
+                  <form method="post" action="{{ route('consignments.update', $consignment->id) }}" enctype="multipart/form-data">
           @csrf
           @method('PATCH')
             <div class="row no-gutters form-group">    
@@ -208,8 +222,12 @@
 
             
         </form>
-    
-</div>
+        </div>   
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
 
 @endsection
 

@@ -1,34 +1,46 @@
 
 @extends ('user-base')
-@section('page-title','New Consignment')
-
-@section('searchbar')
-   
-    <span class="teal strong"> 
-        <i class="fas fa-truck"></i> &nbsp {{$container->vehicleNo}} &nbsp &nbsp 
-        <i class="far fa-user"></i> &nbsp {{$container->carrierName}} &nbsp &nbsp 
-        <i class="far fa-clock"></i> &nbsp {{$container->created_at}}  
-    </span>        
-   
+@section('page-title-section')
+<section class='page-title-section'>
+   <div class="container">
+      <div class="row no-gutters my-auto">
+         <div class="col-md-4 mr-auto">
+            <nav aria-label="breadcrumb">
+               <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="{{route('users.index')}}">Home</a></li>
+                  <li class="breadcrumb-item"><a href="{{route('containers.index')}}">Containers</a></li>
+                  <li class="breadcrumb-item"><a href="{{route('containers.show', $container->id)}}">{{$container->vehicleNo}}</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">New Consignment</li>
+               </ol>
+            </nav>
+        </div>
+    </div>
+</section>
 @endsection
 
-@section('page')
-
-<div class="container border-0 pl-4 pr-4 pt-2 pb-2 shadow-lg">
-    
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
+@section('page-data-section')
+<section class="page-data-section">
+   <div class="container">
+      @if ($errors->any())
+      <div class="alert alert-danger">
+         <ul>
             @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
+            <li>{{ $error }}</li>
             @endforeach
-        </ul>
-        </div>
-        <br />
-    @endif
-        <form method="post" action="{{ route('consignments.store') }}" enctype="multipart/form-data">
+         </ul>
+      </div>
+      <br />
+      @endif
+      @php
+         $sr=1;
+      @endphp
+      <div class="row no-gutters">
+         <div class="col">
+            <div class="row no-gutters justify-content-center">
+               <div class="col-sm-11 shadow-lg p-4">
+                <form method="post" action="{{ route('consignments.store') }}" enctype="multipart/form-data">
             @csrf
-            <div class="form-group">    
+            <div>    
                <input type="text" name='containerId' value="{{$container->id}}" hidden>
             </div>
           
@@ -171,20 +183,18 @@
 
             </div>
 
-            <div class="row no-gutters form-group">
-                
-                
-            </div>
-
-            
         </form>
-    
-</div>
+    </div>   
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
 
 @endsection
 
 
-@section('create-modal')
+@section('modal-section')
   
 <!----------------------------------------------------------------------------
                                 Create Consigner modal
@@ -214,7 +224,7 @@
                 </div>
                 <div class="col-sm-4 pr-2">
                   <label for="phone">Phone *</label>
-                  <input type="text" class="form-control" id="consigner_phone" autocomplete='off' pattern='03[0-9]{9}' placeholder="03xxxxxxxxx" required>
+                  <input type="text" class="form-control" id="consigner_phone" autocomplete='off' pattern='0[0-9]{10}' placeholder="0xxxxxxxxxx" required>
                   
                   <div class="form-group hidden text-center" id='consigner_phone_sub'></div>
 
@@ -268,7 +278,7 @@
 
                     <div class="col-sm-4 pr-2">
                         <label for="phone">Phone *</label>
-                        <input type="text" class="form-control" id="consignee_phone" autocomplete='off' pattern='03[0-9]{9}' placeholder="03xxxxxxxxx" required>
+                        <input type="text" class="form-control" id="consignee_phone" autocomplete='off' pattern='0[0-9]{10}' placeholder="0xxxxxxxxxx" required>
                         <div class="form-group text-center hidden" id='consignee_phone_sub'></div>
               
                     </div>
