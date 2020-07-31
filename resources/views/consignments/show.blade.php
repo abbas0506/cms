@@ -7,7 +7,7 @@
          <div class="col-md-6 mr-auto">
             <nav aria-label="breadcrumb">
                <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="{{route('users.index')}}">Home</a></li>
+                  <li class="breadcrumb-item"><a href="{{url('user-home')}}">Home</a></li>
                   <li class="breadcrumb-item"><a href="{{route('containers.index')}}">Containers</a></li>
                   <li class="breadcrumb-item"><a href="{{route('containers.show',$consignment->container->id)}}">{{$consignment->container->vehicleNo}}</a></li>
                   <li class="breadcrumb-item active" aria-current="page">Consignment # {{$consignment->biltyNo}}</li>
@@ -69,12 +69,12 @@
                                 </div>
                                 <br>
                                 <div class="row no-gutters">
-                                    <div class="col-sm-6 strong">Consigner:</div>
-                                    <div class="col-sm-6 ">{{$consignment->consigner->name}}</div>
-                                </div>
-                                <div class="row no-gutters">
                                     <div class="col-sm-6 strong">Consignee:</div>
                                     <div class="col-sm-6 ">{{$consignment->consignee->name}}</div>
+                                </div>
+                                <div class="row no-gutters">
+                                    <div class="col-sm-6 strong">No. of Items:</div>
+                                    <div class="col-sm-6 ">{{$consignment->nItems}}</div>
                                 </div>
                                 <div class="row no-gutters">
                                     <div class="col-sm-6 strong">Description:</div>

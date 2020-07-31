@@ -7,7 +7,7 @@
          <div class="col-md-4 mr-auto">
             <nav aria-label="breadcrumb">
                <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="{{route('users.index')}}">Home</a></li>
+                  <li class="breadcrumb-item"><a href="{{url('user-home')}}">Home</a></li>
                   <li class="breadcrumb-item"><a href="{{route('containers.index')}}">Containers</a></li>
                   <li class="breadcrumb-item"><a href="{{route('containers.show', $container->id)}}">{{$container->vehicleNo}}</a></li>
                   <li class="breadcrumb-item active" aria-current="page">New Consignment</li>
@@ -47,7 +47,7 @@
             <div class="row no-gutters form-group">    
                 <div class="col-sm-2 pr-2">
                     <label for="biltyNo">Bilty No. *</label>
-                    <input type="text" class="form-control text-center" name="biltyNo" placeholder="xxxx" pattern='[1-9][0-9]{0,3}' required>
+                    <input type="text" class="form-control text-center" name="biltyNo" placeholder="Bilty #" pattern='[0-9][0-9]{1,}' required>
                 </div>
                 <div class="col-sm-3 pr-2">
                     <label for="name">Consigner* <a href='#' data-toggle='modal' data-target='#createConsignerModal' class="txt-s ml-3" >New</a></label>
@@ -75,7 +75,7 @@
                 
                 <div class="col-sm-3 pl-2">
                     <label for="Description">Description</label>
-                    <input class="form-control" name="description" placeholder='e.g 4 cartons'>
+                    <input class="form-control" name="description" placeholder='In words'>
                 </div>
               
             </div>
@@ -89,28 +89,28 @@
                     <div class="row">
                         <div class="col my-auto strong">Vehicle *</div>
                         <div class="col">
-                            <input type="text" class="form-control text-center" name="vehicleCharges" value='0' pattern='0|[1-9][0-9]{0,3}' required>
+                            <input type="text" class="form-control text-center" name="vehicleCharges" value='0' pattern='0|[1-9][0-9]{0,5}' required>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col my-auto strong">Loading-1 *</div>
                         <div class="col">
-                            <input type="text" class="form-control charges text-center" name="loadOneCharges" value='0' pattern='0|[1-9][0-9]{0,3}' required>
+                            <input type="text" class="form-control charges text-center" name="loadOneCharges" value='0' pattern='0|[1-9][0-9]{0,5}' required>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col my-auto strong">Bilty-1 *</div>
                         <div class="col">
-                            <input type="text" class="form-control charges text-center" name="biltyOneCharges" value='0' pattern='0|[1-9][0-9]{0,3}' required>
+                            <input type="text" class="form-control charges text-center" name="biltyOneCharges" value='70' pattern='0|[1-9][0-9]{0,5}' required>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col my-auto strong">Insurance *</div>
                         <div class="col">
-                            <input type="text" class="form-control charges text-center" name="insurance" value='0' pattern='0|[1-9][0-9]{0,3}' required>
+                            <input type="text" class="form-control charges text-center" name="insurance" value='30' pattern='0|[1-9][0-9]{0,3}' required>
                         </div>
                     </div>
 

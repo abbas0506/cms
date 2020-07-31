@@ -6,7 +6,7 @@
          <div class="col-md-6 mr-auto">
             <nav aria-label="breadcrumb">
                <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="{{route('users.index')}}">Home</a></li>
+                  <li class="breadcrumb-item"><a href="{{url('user-home')}}">Home</a></li>
 						<li class="breadcrumb-item"><a href="{{route('containers.index')}}">Containers</a></li>
 						<li class="breadcrumb-item active" aria-current="page">{{$container->vehicleNo}}</li>
                </ol>
@@ -51,31 +51,31 @@
       @endphp
       <div class="row no-gutters">
          <div class="col">
-            <div class="row no-gutters ml-3 ">
+            <div class="row no-gutters ml-3 teal">
                	<div class="col-sm-2 txt-lb" data-toggle="collapse" data-target="#containerInfo">
-               		<i class="fas fa-truck pr-2"></i>{{$container->vehicleNo}} <i class="fas fa-chevron-down icon-r"></i>
-               	</div>
-               <div class='col-sm-12 txt-s mt-2 form-group collapse border-bottom' id='containerInfo'> 
-               		
-               		<div class="row no-gutters">
-               			<div class="col-sm-2 offset-sm-2 strong"> Driver: </div> 
-               			<div>{{$container->carrierName}}</div>
-               		</div>
-               		<div class="row no-gutters">
-               			<div class="col-sm-2 offset-sm-2 strong"> Amount: </div>
-               			<div>{{$container->getTotal()}}</div>
-               		</div>
-               		<div class="row no-gutters">
-               			<div class="col-sm-2 offset-sm-2 strong"> Date: </div>
-               			<div>{{$container->created_at}}</div>
-               		</div>
-               		
+               		<i class="fas fa-truck pr-2"></i>{{$container->vehicleNo}} <i class="fas fa-chevron-down pl-5"></i>
                	</div>
             </div>
             
             <div class="row no-gutters justify-content-center">
-               <div class="col-sm-8">
-					
+               <div class="col-sm-9">
+						<div class='row no-gutters txt-s mt-2 form-group collapse' id='containerInfo'> 
+               		<div class="col p-4 border rounded">
+							<div class="row no-gutters ">
+               			<div class="col-sm-2 strong"> Driver Name: </div> 
+               			<div>{{$container->carrierName}}</div>
+               		</div>
+               		<div class="row no-gutters">
+               			<div class="col-sm-2 strong"> Total Amount: </div>
+               			<div>{{$container->getTotal()}}</div>
+               		</div>
+               		<div class="row no-gutters">
+               			<div class="col-sm-2 strong"> Arrival Date: </div>
+               			<div>{{$container->created_at}}</div>
+               		</div>
+							</div>
+               	</div>
+
 					<div class="row no-gutters">
 					 	<div class="col-sm-4 offset-sm-8 my-auto">
 					 		<i class="fas fa-search text-secondary icon-l"></i>
@@ -98,12 +98,16 @@
 					<!-- Consignment Tab -->
 					<div class="tab-content mt-4">
 						<div class="tab-pane container active" id="consignments">
+							@php
+								$sr=1;
+							@endphp
 							<table class="table table-striped" id='tblConsignments'>
 								<thead>
 									<tr class="strong">
+										<td>Sr.</td>
 										<td>Bilty No.</td>
 										<td>Consigner</td>
-										<td>Consignee</td>
+										<td>Items</td>
 										<td>Description</td>
 										<td>Amount</td>
 										<td>Status</td>
@@ -114,9 +118,10 @@
 									@foreach($container->consignments as $consignment)
 									<tr>
 										<td class='hidden'>{{$consignment->id}}</td>
+										<td>{{$sr++}}</td>
 										<td>{{$consignment->biltyNo}}</td>
 										<td>{{$consignment->consigner->name}}</td>
-										<td>{{$consignment->consignee->name}}</td>
+										<td>{{$consignment->nItems}}</td>
 										<td>{{$consignment->description}}</td>
 										<td>{{$consignment->getTotal()}}</td>
 										<td>
@@ -324,7 +329,7 @@
 		$("#filter").on("keyup", function() {
 	      	var txt = $(this).val().toLowerCase();
 	      	$("table tbody tr").each(function() {
-	        	if($(this).children().eq(1).text().toLowerCase().includes(txt)||$(this).children().eq(3).text().toLowerCase().includes(txt))
+	        	if($(this).children().eq(2).text().toLowerCase().includes(txt)||$(this).children().eq(4).text().toLowerCase().includes(txt))
 	          		$(this).show();
 	        	else
 	          		$(this).hide();

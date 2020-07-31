@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::view('/','login');
+Route::view('user-home','user-home');
 
 Route::resource('containers', 'ContainerController');
 Route::resource('consignments', 'ConsignmentController');
@@ -45,6 +46,7 @@ Route::group(['middleware'=>'admin'], function(){
 	Route::resource('logs', 'LogController');
 });
 
+Route::get('signout','UserController@signout')->name('signout');
 Route::get('signout','UserController@signout')->name('signout');
 Route::get('changePassword','UserController@changePassword')->name('changePassword');
 Route::get('dashboard','UserController@dashboard')->name('dashboard');

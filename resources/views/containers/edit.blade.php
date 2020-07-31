@@ -7,7 +7,7 @@
          <div class="col-md-4 mr-auto">
             <nav aria-label="breadcrumb">
                <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="{{route('users.index')}}">Home</a></li>
+                  <li class="breadcrumb-item"><a href="{{url('user-home')}}">Home</a></li>
                   <li class="breadcrumb-item"><a href="{{route('containers.index')}}">Containers</a></li>
                   <li class="breadcrumb-item active" aria-current="page">Edit</li>
                </ol>
@@ -48,44 +48,43 @@
          <div class="col">
             <div class="row no-gutters justify-content-center">
                <div class="col-sm-8 shadow-lg p-4">
-					<form method="post" action="{{ route('containers.update', $container->id) }}">
-        @csrf
-        @method('PATCH')
-        <div class="row no-gutters form-group">      
-            <div class="col-sm-2 pr-2">
-                <label for="name">Vehicle No. *</label>
-                <input type="text" class="form-control" name="vehicleNo" placeholder='Vehicle No.' value='{{$container->vehicleNo}}' required>
-            </div>
-            
-            <div class="col-sm-5 pr-2">
-                <label for="name">Forwarder</label>
-                <input class="form-control" readonly value="{{$container->forwarder->name}}">
-            </div>
-        </div>
-          
-        <div class="row no-gutters form-group">    
-            
-            <div class="col-sm-7 pr-2">
-                <label for="name">Carrier Name*</label>
-                <input type="text" class="form-control" name="carrierName" placeholder='Carrier name' pattern='[a-z A-Z]+' title='Name must contain characters only' value='{{$container->carrierName}}' required>
-            </div>
-              
-            <div class="col-sm-5">
-                <label for="carrierPhone">Carrier Phone</label>
-                <input type="text" class="form-control" name="carrierPhone" placeholder="0xxxxxxxxxx" autocomplete='off' pattern='0[0-9]{10}' value='{{$container->carrierPhone}}'>
-                <div class="form-group text-center hidden p-0 m-0" id='carrier_phone_sub'></div>
+                  <form method="post" action="{{ route('containers.update', $container->id) }}">
+                     @csrf
+                     @method('PATCH')
+                     <div class="row no-gutters form-group">      
+                           <div class="col-sm-2 pr-2">
+                              <label for="name">Vehicle No. *</label>
+                              <input type="text" class="form-control" name="vehicleNo" placeholder='Vehicle No.' value='{{$container->vehicleNo}}' required>
+                           </div>
+                           
+                           <div class="col-sm-5 pr-2">
+                              <label for="name">Forwarder</label>
+                              <input class="form-control" readonly value="{{$container->forwarder->name}}">
+                           </div>
+                     </div>
+                        
+                     <div class="row no-gutters form-group">    
+                           
+                           <div class="col-sm-7 pr-2">
+                              <label for="name">Carrier Name*</label>
+                              <input type="text" class="form-control" name="carrierName" placeholder='Carrier name' pattern='[a-z A-Z]+' title='Name must contain characters only' value='{{$container->carrierName}}' required>
+                           </div>
+                           
+                           <div class="col-sm-5">
+                              <label for="carrierPhone">Carrier Phone</label>
+                              <input type="text" class="form-control" name="carrierPhone" placeholder="0xxxxxxxxxx" autocomplete='off' pattern='0[0-9]{10}' value='{{$container->carrierPhone}}'>
+                              <div class="form-group text-center hidden p-0 m-0" id='carrier_phone_sub'></div>
 
-            </div>
-        </div>
-        
-        <div class="row no-gutters">    
-            <div class="col text-right">
-                <button type="submit" class="btn btn-success btn-sm">Save</button>
-            </div>
-        </div>
-    </form>
-
-				</div>   
+                           </div>
+                     </div>
+                     
+                     <div class="row no-gutters">    
+                           <div class="col text-right">
+                              <button type="submit" class="btn btn-success btn-sm">Save</button>
+                           </div>
+                     </div>
+                  </form>
+               </div>   
             </div>
          </div>
       </div>

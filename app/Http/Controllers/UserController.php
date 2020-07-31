@@ -151,7 +151,7 @@ class UserController extends Controller
                 if($user->role==1)
                   return redirect ('users');
                 else
-                  return redirect ('containers');
+                  return redirect ('user-home');
             }else{
                 $Log->description=$user->id."'s login attemp failed"; 
                 $Log->save();   
@@ -204,7 +204,7 @@ class UserController extends Controller
     }
 
     public function dashboard(){
-        if(session()->get('role')==0) return redirect ('containers');
+        if(session()->get('role')==0) return redirect ('user-home');
         if(session()->get('role')==1) return redirect ('users');
         return redirect ('/');
     }

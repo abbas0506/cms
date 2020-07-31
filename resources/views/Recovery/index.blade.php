@@ -1,23 +1,44 @@
 @extends ('user-base')
-@section('page-title','Recoveries')
-@section('searchbar')
-	 <div class="row">
-	 	<div class="col-sm-6 my-auto">
-	 		<i class="fas fa-search text-secondary icon-l"></i>
-	 		<input type="text" id="filter" class="form-control text-center round" placeholder="Type consignee name">
-	 	</div>
-	 
-	</div>
+@section('page-title-section')
+<section class='page-title-section'>
+   <div class="container">
+      <div class="row no-gutters my-auto">
+         <div class="col-md-4 mr-auto">
+            <nav aria-label="breadcrumb">
+               <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="{{url('user-home')}}">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Recovery List</li>
+               </ol>
+           </nav>
+         </div>
+      <div class="col-md-3 offset-col-5 text-center">
+         <div class="row no-gutters">
+            <div class="col text-center">
+            <a href="{{route('containers.create')}}">
+                  <div class="icon-xl text-success"><i class="fa fa-print"></i></div>
+                  <div class="micro">Print Recovery List</div>
+               </a>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
 @endsection
 
-@section('toolbar')
-	<a href="{{route('containers.create')}}" class='btn btn-primary btn-sm'><i class="fa fa-print"></i></a>
-		 
-@endsection
-
-@section('page')
-	@if(session('success'))
-    	<script type="text/javascript">
+@section('page-data-section')
+<section class="page-data-section">
+   <div class="container">
+      @if ($errors->any())
+      <div class="alert alert-danger">
+         <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+         </ul>
+      </div>
+      <br />
+      @elseif(session('success'))
+      <script type="text/javascript">
 	      Swal.fire({
 	          icon: 'success',
 	          text: "{{session('success')}}",
@@ -25,43 +46,59 @@
 	          timer:2000
 	        });
       	</script>
-    @endif
+    
+      @endif
+      @php
+         $sr=1;
+      @endphp
+      <div class="row no-gutters">
+         <div class="col">
+            <div class="row no-gutters justify-content-center">
+               <div class="col-sm-8">
+					<div class="row">
+					 	<div class="col-sm-4 my-auto">
+					 		<i class="fas fa-search text-secondary icon-l"></i>
+					 		<input type="text" id="filter" class="form-control text-center round" placeholder="Type consignee name">
+					 	</div>
+					 
+					</div>
 
-		<table class="table table-striped">
-		    <thead>
-		        <tr class="strong">
-		          <td>Consignee</td>
-		          <td>Phone</td>
-		          <td>Total</td>
-		          <td>Recovered</td>
-		          <td>Due</td>
-		          <td class="text-center"><i class="fas fa-bars"></td>
-		        </tr>
-		    </thead>
-		    <tbody>
-		        @foreach($consignees as $consignee)
-		        <tr>
-		            <td>{{$consignee->name}}</td>
-		            <td>{{$consignee->phone}}</td>
-		            <td>{{$consignee->sumOfCr()}}</td>
-		            <td>{{$consignee->sumOfDb()}}</td>
-		            <td>{{$consignee->sumOfCr()-$consignee->sumOfDb()}}</td>
-		            
-					<td class='text-center'>
-						<a href="{{route('recoveries.show', $consignee->id)}}" class='btn btn-sm btn-link text-info'><i class="far fa-eye"></i></a>
-						<a href="#" class='btn btn-sm btn-link text-danger'><i class="fas fa-history"></i></a>
-		            	
-					</td>
-					
-		        </tr>
-		        @endforeach
-		    </tbody>
-		  </table>
-		
-@endsection
-
-@section('delfrm')
-
+					<table class="table table-striped mt-2">
+						<thead>
+							<tr class="strong">
+								<td>Consignee</td>
+								<td>Phone</td>
+								<td>Total</td>
+								<td>Recovered</td>
+								<td>Due</td>
+								<td class="text-center"><i class="fas fa-bars"></td>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach($consignees as $consignee)
+							<tr>
+									<td>{{$consignee->name}}</td>
+									<td>{{$consignee->phone}}</td>
+									<td>{{$consignee->sumOfCr()}}</td>
+									<td>{{$consignee->sumOfDb()}}</td>
+									<td>{{$consignee->sumOfCr()-$consignee->sumOfDb()}}</td>
+									
+								<td class='text-center'>
+									<a href="{{route('recoveries.show', $consignee->id)}}" class='btn btn-sm btn-link text-info'><i class="far fa-eye"></i></a>
+									<a href="#" class='btn btn-sm btn-link text-danger'><i class="fas fa-history"></i></a>
+										
+								</td>
+								
+							</tr>
+							@endforeach
+						</tbody>
+					</table>
+					</div>   
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
 @endsection
 
 @section('script')

@@ -1,61 +1,91 @@
 @extends ('user-base')
-@section('page-title')
-	Recoveries
+@section('page-title-section')
+<section class='page-title-section'>
+   <div class="container">
+      <div class="row no-gutters my-auto">
+         <div class="col-md-4 mr-auto">
+            <nav aria-label="breadcrumb">
+               <ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="{{url('user-home')}}">Home</a></li>
+						<li class="breadcrumb-item"><a href="{{route('recoveries.index')}}">Recovery List</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">{{$consignee->name}}</li>
+               </ol>
+           </nav>
+         </div>
+      <div class="col-md-3 offset-col-5 text-center">
+         <div class="row no-gutters">
+            <div class="col text-center">
+            	<a href="#" data-toggle="modal" data-target="#newRecovery">
+						<div class="icon-xl text-success"><i class="fa fa-plus-circle"></i></div>
+                  <div class="micro">New Recovery</div>
+               </a>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
 @endsection
 
-@section('toolbar')
-	<a href="#" class='btn btn-success btn-sm' data-toggle="modal" data-target="#createPayment"><i class="fa fa-plus"></i></a>
-	<a target='_blank' href="#" class='btn btn-primary btn-sm'><i class="fa fa-print"></i></a>
-	
-		 
-@endsection
+@section('page-data-section')
+<section class="page-data-section">
+   <div class="container">
+      @if ($errors->any())
+      <div class="alert alert-danger">
+         <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+         </ul>
+      </div>
+      <br />
+      @endif
+      @php
+         $sr=1;
+      @endphp
+      <div class="row no-gutters">
+         <div class="col">
+            <div class="row no-gutters ml-3 teal ">
+               	<div class="col-sm-2 txt-lb" data-toggle="collapse" data-target="#containerInfo">
+               		<i class="far fa-user pr-2"></i>{{$consignee->name}} <i class="fas fa-chevron-down pl-5"></i>
+               	</div>
+            </div>
+            
+            <div class="row no-gutters justify-content-center">
+               <div class="col-sm-9">
+						<div class='row no-gutters txt-s mt-2 form-group collapse' id='containerInfo'> 
+               		<div class="col p-4 border rounded">
+							<div class="row no-gutters ">
+               			<div class="col-sm-2 strong"> Total : </div> 
+               			<div>{{$consignee->sumOfCr()}}</div>
+               		</div>
+               		<div class="row no-gutters">
+               			<div class="col-sm-2 strong">Recovered : </div>
+               			<div>{{$consignee->sumOfDb()}}</div>
+               		</div>
+               		<div class="row no-gutters">
+               			<div class="col-sm-2 strong"> Net Arrears : </div>
+               			<div>{{$consignee->sumOfCr()-$consignee->sumOfDb()}}</div>
+               		</div>
+							</div>
+               	</div>
 
-@section('page')
-	@if(session('success'))
-		<script type="text/javascript">
-		  Swal.fire({
-			  icon: 'success',
-			  text: "{{session('success')}}",
-			  showConfirmButton: false,
-			  timer:2000
-			});
-		</script>
-	@endif
+					<!-- navigation tabs -->
 
-	<div class="container border border-rounded p-4 mt-4 mb-4">
-		<div class="row no-gutters pb-2">
-			<div class="col-sm-3 p-3 my-bg-warning text-center teal">
-				<div class="strong mb-2"><i class="far fa-user"></i></div>
-				<div>{{$consignee->name}}</div>					
-			</div>
-			<div class="col-sm-3 p-3 my-bg-success text-center text-success">
-				<div class="strong ">Total</div>
-				<div>{{$consignee->sumOfCr()}}</div>					
-			</div>
-			<div class="col-sm-3 p-3 my-bg-info text-center text-primary">
-				<div class="strong">Recovery</div>
-				<div>{{$consignee->sumOfDb()}}</div>					
-			</div>
-			<div class="col-sm-3 p-3 my-bg-warning text-center text-danger">
-				<div class="strong">Arears</div>
-				<div>{{$consignee->sumOfCr()-$consignee->sumOfDb()}}</div>					
-			</div>
-		</div>
-	</div>			
-		
-	<ul class="nav nav-tabs">
-		<li class="nav-item">
-			<a class='nav-link active' data-toggle="tab" href="#recentTransactions">Recent Transacton</a>
-		</li>
-		<li class="nav-item">
-			<a class='nav-link' data-toggle="tab" href="#recoveries">Recoveries Only</a>
-		</li>
-		<li class='nav-item'>
-			<a class='nav-link' data-toggle="tab" href="#consignments">Consignments Only</a>
-		</li>
-	</ul>
+					<ul class="nav nav-tabs mt-4 mb-4">
+						<li class="nav-item">
+							<a class='nav-link active' data-toggle="tab" href="#recentTransactions">Recent Transacton</a>
+						</li>
+						<li class="nav-item">
+							<a class='nav-link' data-toggle="tab" href="#recoveries">Recoveries Only</a>
+						</li>
+						<li class='nav-item'>
+							<a class='nav-link' data-toggle="tab" href="#consignments">Consignments Only</a>
+						</li>
+					</ul>
 
-	<div class="tab-content">
+
+					<!-- Recent transactions Tab -->
+					<div class="tab-content">
 		<div class="tab-pane container active" id="recentTransactions">
 			@php
 				$sr=0;
@@ -114,6 +144,8 @@
 			</table>
 
 		</div>
+		
+		<!-- recoveries tab -->
 		<div class="tab-pane container" id="recoveries">
 			@php
 				$sr=0
@@ -150,6 +182,8 @@
 			</table>
 
 		</div>
+
+		<!-- consignments tab -->
 		
 		<div id="consignments" class="tab-pane fade in active">
 			@php
@@ -162,6 +196,7 @@
 						<td>Sr</td>
 						<td>Date</td>
 						<td>Bilty No.</td>
+						<td>Items</td>
 						<td>Description</td>
 						<td>Delivery</td>
 						<td>Amount</td>
@@ -174,6 +209,7 @@
 						<td>{{++$sr}}</td>
 						<td>{{$consignment->created_at}}</td>
 						<td>{{$consignment->biltyNo}}</td>
+						<td>{{$consignment->nItems}}</td>
 						<td>{{$consignment->description}}</td>
 						<td>
 							@if($consignment->getStatus()=='Pending')
@@ -199,14 +235,22 @@
 			</table>
 		</div>
 		
-				
-	</div>
+	
+				</div>   
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+@endsection
+
+@section('modal-section')
 	<!----------------------------------------------------------------------------
 									Create Payment modal
 	------------------------------------------------------------------------------>
 
 	<!-- Insert class Modal -->
-	<div class="modal fade" id="createPayment" role="dialog" >
+	<div class="modal fade" id="newRecovery" role="dialog" >
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<!-- Modal Header -->
@@ -248,12 +292,6 @@
 			</div>
 		</div>
 	</div> 
-
-		
-@endsection
-
-@section('delfrm')
-
 @endsection
 
 @section('script')

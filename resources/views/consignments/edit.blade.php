@@ -7,7 +7,7 @@
          <div class="col mr-auto">
             <nav aria-label="breadcrumb">
                <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="{{route('users.index')}}">Home</a></li>
+                  <li class="breadcrumb-item"><a href="{{url('user-home')}}">Home</a></li>
                   <li class="breadcrumb-item"><a href="{{route('containers.index')}}">Containers</a></li>
                   <li class="breadcrumb-item"><a href="{{route('containers.show', $consignment->container->id)}}">{{$consignment->container->vehicleNo}}</a></li>
                   <li class="breadcrumb-item active" aria-current="page">Edit Consignment</li>
@@ -175,8 +175,7 @@
                     </div>
 
                     
-                    <div class="row mt-2 blue
-                     strong">
+                    <div class="row mt-2 blue strong">
                         <div class="col-sm-6 my-auto">Subtotal-2:</div>
                         <div class="col-sm-6 my-auto text-center" id='subtotal'>0</div>
                     </div>
@@ -215,7 +214,7 @@
 
             </div>
 
-            <div class="row no-gutters form-group">
+            <div class="row no-gutters">
                 <div class="col text-right"><button type="submit" class="btn btn-success btn-sm">Save</button></div>
                 
             </div>
