@@ -235,15 +235,34 @@ class ConsignmentController extends Controller
     }
 
     function searchByDates(Request $request){
-        $from    = Carbon::parse($request->from)
+        
+        if($request->from=='' && $request->to==''){ //both dates missing
+            $consignments=Consignment::all()->sortByDesc('created_at');
+        }elseif($request->from!='' && $request->to==''){    //only date from given
+            $from = Carbon::parse($request->from)
+                 ->startOfDay()        // 2018-09-29 00:00:00.000000
+                 ->toDateTimeString(); // 2018-09-29 00:00:00
+            
+            $consignments=Consignment::where('created_at','>=',$from)->get()->sortByDesc('created_at');
+        }elseif($request->from=='' && $request->to!=''){    //only date to given
+            $to = Carbon::parse($request->to)
+                 ->endOfDay()          // 2018-09-29 23:59:59.000000
+                 ->toDateTimeString();
+
+            $consignments=Consignment::where('created_at','<=',$to)->get()->sortByDesc('created_at');
+
+        }else{      //both dates given
+            $from = Carbon::parse($request->from)
                  ->startOfDay()        // 2018-09-29 00:00:00.000000
                  ->toDateTimeString(); // 2018-09-29 00:00:00
 
-        $to      = Carbon::parse($request->to)
+            $to = Carbon::parse($request->to)
                  ->endOfDay()          // 2018-09-29 23:59:59.000000
                  ->toDateTimeString();
+            $consignments=Consignment::whereBetween('created_at',[$from,$to])->get()->sortByDesc('created_at');
         
-        $consignments=Consignment::whereBetween('created_at',[$from,$to])->get()->sortByDesc('created_at');
+        }
+
         return view('consignments.index',compact('consignments'));
     }
 }

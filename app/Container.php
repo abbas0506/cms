@@ -38,6 +38,21 @@ class Container extends Model
       
           });
     }
+
+    // find subtotal of all consignments of this container
+    public function getSubTotalOne(){
+        return $this->consignments->sum(function($consignment){
+            return $consignment->getSubTotalOne();
+      
+          });
+    }
+    public function getSubTotalTwo(){
+        return $this->consignments->sum(function($consignment){
+            return $consignment->getSubTotalTwo();
+      
+          });
+    }
+
     public function getCarrierFraction(){
         return $this->consignments->sum(function($consignment){
             return $consignment->getSubTotalOne();

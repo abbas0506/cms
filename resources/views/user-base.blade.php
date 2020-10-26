@@ -44,6 +44,7 @@
   </header>
   
   @yield('page-title-section')
+  @yield('search-section')
   @yield('page-data-section')
   @yield('modal-section')
   @yield('script')

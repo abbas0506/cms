@@ -149,7 +149,7 @@ class UserController extends Controller
                 $Log->save();          
                 
                 if($user->role==1)
-                  return redirect ('users');
+                  return redirect ('admin-home');
                 else
                   return redirect ('user-home');
             }else{
@@ -191,14 +191,11 @@ class UserController extends Controller
 
         //create log
         $Log= new Log();
-        $Log->userId=session()->get('id');
         $Log->operation="UPD";
         $Log->description=$user->id." changed his/her password:";
         
         $Log->save();
        
-
-
         return redirect('/changePassword')->with('response',$response);
         
     }

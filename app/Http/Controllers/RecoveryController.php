@@ -17,7 +17,7 @@ class RecoveryController extends Controller
     public function index()
     {
         //
-        $consignees=Consignee::all();
+        $consignees=Consignee::orderBy('name')->get();
         return view('recovery.index',compact('consignees'));
     }
 

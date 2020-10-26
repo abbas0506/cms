@@ -15,16 +15,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/','login');
 Route::view('user-home','user-home');
-
-Route::resource('containers', 'ContainerController');
-Route::resource('consignments', 'ConsignmentController');
-Route::resource('payments', 'PaymentController');
-Route::resource('recoveries', 'RecoveryController');
+Route::view('admin-home', 'admin-home');
 
 Route::post('auth', 'UserController@auth')->name('auth');
 
 Route::post('handover', 'ConsignmentController@handover');
-Route::post('searchByDates', 'ConsignmentController@searchByDates');
+Route::post('searchByDates', 'ConsignmentController@searchByDates')->name('searchByDates');;
 
 //changes containers display: either top 5 or show all
 Route::get('containers_switch_show_mode/{mode?}', 'ContainerController@index');
@@ -37,7 +33,6 @@ Route::post('ajaxAddConsigner', 'AjaxController@addConsigner')->name('ajax_addCo
 Route::post('ajaxAddConsignee', 'AjaxController@addConsignee')->name('ajax_addConsignee');
 
 Route::group(['middleware'=>'admin'], function(){
-	
 	Route::resource('users', 'UserController');
 	Route::resource('consigners', 'ConsignerController');
 	Route::resource('consignees', 'ConsigneeController');
@@ -46,7 +41,13 @@ Route::group(['middleware'=>'admin'], function(){
 	Route::resource('logs', 'LogController');
 });
 
-Route::get('signout','UserController@signout')->name('signout');
+//Route::group(['middleware'=>'user'], function(){
+	Route::resource('containers', 'ContainerController');
+	Route::resource('consignments', 'ConsignmentController');
+	Route::resource('payments', 'PaymentController');
+	Route::resource('recoveries', 'RecoveryController');
+//});
+
 Route::get('signout','UserController@signout')->name('signout');
 Route::get('changePassword','UserController@changePassword')->name('changePassword');
 Route::get('dashboard','UserController@dashboard')->name('dashboard');

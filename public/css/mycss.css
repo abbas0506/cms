@@ -17,7 +17,15 @@
 .sticky + .content {
   padding-top: 120px;
 }
+/*
+* Login screen
+*/
 
+#login-screen{
+  
+  margin-top: 10%;
+  /*background: linear-gradient(to right, #cce6dd 0%, #cce6dd 100%); */
+}
 
 /*
 Table
@@ -170,6 +178,18 @@ input:focus, select:focus, textarea:focus {
   box-shadow:none !important;
 }
 
+.shortcut{
+  background-color:white;
+  text-decoration: none !important;
+  color:black;
+  
+}
+.shortcut .border:hover{
+  background-color: #09667D;
+  color:white;
+  cursor:hand;
+  transition: 500ms;
+}
 /*
 * bread crumb
 */

@@ -1,80 +1,107 @@
 @extends ('admin-base')
-@section('page-title','Consignees')
-@section('searchbar')
-	 <div class="row">
-	 	<div class="col-sm-6 my-auto">
-	 		<i class="fas fa-search text-secondary icon-l"></i>
-	 		<input type="text" id="filter" class="form-control text-center round" placeholder="Type here">
-	 	</div>
-	 
+@section('nav')
+<section id='nav-section'>
+   <div class="container mt-4">
+      <div class="row no-gutters my-auto">
+         <div class="col-md-4 mr-auto">
+            <nav aria-label="breadcrumb">
+               <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="{{url('admin-home')}}">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Consignees</li>
+               </ol>
+           </nav>
+         </div>
+      <div class="col-md-3 offset-col-5 text-center">
+         <div class="row no-gutters">
+            <div class="col text-center">
+            	<a href="{{route('consignees.create')}}">
+                  <div class="icon-xl text-success"><i class="fa fa-plus-circle"></i></div>
+                  <div class="micro">New Consignee</div>
+               </a>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+@endsection
+
+@section('search')
+<section id='nav-section'>
+	<div class='container'>
+		<div class="row justify-content-center">
+			<div class='col-sm-8'>
+				<div class='row form-group'>
+					<div class="col-sm-3 my-auto">
+						<i class="fas fa-search text-secondary icon-l"></i>
+						<input type="text" id="filter" class="form-control text-center round" placeholder="Type name">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> 
+</section>
+@endsection
+
+@section('data')
+<section id='nav-section'>
+	<div class='container'>
+		<div class="row justify-content-center">
+			<div class='col-sm-8'>
+			@if(session('success'))
+				<script type="text/javascript">
+					Swal.fire({
+						icon: 'success',
+						text: "{{session('success')}}",
+						showConfirmButton: false,
+						timer:2000
+					});
+					</script>
+			@endif
+
+				<table class="table table-striped">
+					<thead>
+						<tr class="strong">
+							<td>ID</td>
+							<td>Name</td>
+							<td>Phone</td>
+							<td>Email</td>
+							<td>Address</td>
+							<td class="text-center"><i class="fa fa-bars"></td>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach($consignees as $consignee)
+						<tr>
+								<td >{{$consignee->id}}</td>
+								<td>{{$consignee->name}}</td>
+								<td>{{$consignee->phone}}</td>
+								<td>{{$consignee->email}}</td>
+								<td>{{$consignee->address}}</td>
+								
+								<form action="{{ route('consignees.destroy', $consignee->id)}}" method="post" onsubmit="return confirm('Are you sure?')" class="p-0 m-0">
+									<td class='text-center'>
+										<a href="{{ route('consignees.edit', $consignee->id)}}" class='btn btn-sm btn-link text-success'><i class="fas fa-pen"></i></a>
+										@csrf
+										@method('DELETE')
+										<button class="btn btn-sm btn-link text-danger" type="submit"><i class="far fa-trash-alt"></i></button>
+									</td>
+								</form> 
+							</tr>
+						@endforeach
+					</tbody>
+				</table>
+			</div>
+		</div>
 	</div>
-@endsection
-
-@section('toolbar')
-	<a href="{{route('consignees.create')}}"><i class="fa fa-plus"></i></a> 
-	<a target='_blank' href="#"><i class="fa fa-print pl-3"></i></a>
-	 
-@endsection
-
-@section('page')
-	@if(session('success'))
-    	<script type="text/javascript">
-	      Swal.fire({
-	          icon: 'success',
-	          text: "{{session('success')}}",
-	          showConfirmButton: false,
-	          timer:2000
-	        });
-      	</script>
-    @endif
-
-		<table class="table table-striped">
-		    <thead>
-		        <tr class="txt-mb">
-		          <td>ID</td>
-		          <td>Name</td>
-		          <td>Phone</td>
-		          <td>Email</td>
-		          <td>Address</td>
-		          <td colspan = 2 class="text-center"><i class="fas fa-caret-down"></td>
-		        </tr>
-		    </thead>
-		    <tbody>
-		        @foreach($consignees as $consignee)
-		        <tr style='height:50px'>
-		            <td >{{$consignee->id}}</td>
-		            <td>{{$consignee->name}}</td>
-		            <td>{{$consignee->phone}}</td>
-		            <td>{{$consignee->email}}</td>
-		            <td>{{$consignee->address}}</td>
-		            <td class="txt-s text-center">
-		               <a href="{{ route('consignees.edit', $consignee->id)}}"><i class="fa fa-pencil-alt text-success pt-2"></i></a>
-		            </td>
-		            <td class="text-center txt-s">
-		                <form class='delete' action="{{ route('consignees.destroy', $consignee->id)}}" method="post" onsubmit="return confirm('Are you sure?')">
-		                  @csrf
-		                  @method('DELETE')
-		                  <button class="btn btn-link" type="submit"><i class="fa fa-times text-danger"></i></button>
-		                </form>
-		            </td>
-		        </tr>
-		        @endforeach
-		    </tbody>
-		  </table>
-		
-@endsection
-
-@section('delfrm')
-
+</section>		
 @endsection
 
 @section('script')
 <script type="text/javascript">
-	
 	$(document).ready(function(){
 		$("#filter").on("keyup", function() {
 	      	var txt = $(this).val().toLowerCase();
-	      	$("table tr").each(function() {
+	      	$("table tbody tr").each(function() {
 	        	if($(this).children().eq(1).text().toLowerCase().includes(txt))
 	          		$(this).show();
 	        	else
@@ -89,12 +116,7 @@
 		  } else {
 		    $('#stickyheader').removeClass("sticky");
 		  }
-
-	 });
-
-	
+		});
 	});
-
 </script>
-
 @endsection

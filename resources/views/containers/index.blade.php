@@ -24,11 +24,11 @@
                <a href="">
                   	<div class="icon-xl text-success"><i class="fa fa-truck"></i></div>
                   	<div class="micro">
-                  	@if($mode==5)
+                  	@if($mode==10)
 						<a href="{{url('containers_switch_show_mode', '*')}}">View All</a>
 					@else
 						
-						<a href="{{url('containers_switch_show_mode', 5)}}">Most Recent</a>
+						<a href="{{url('containers_switch_show_mode', 10)}}">Most Recent</a>
 					@endif
               	</div>
                </a>
@@ -72,7 +72,7 @@
 					<div class="row">
 					 	<div class="col-sm-4 my-auto">
 					 		<i class="fas fa-search text-secondary icon-l"></i>
-					 		<input type="text" id="filter" class="form-control text-center round" placeholder="Type date or vehichle no.">
+					 		<input type="text" id="filter" class="form-control text-center round" placeholder="Search here">
 					 	</div>
 					 
 					</div>
@@ -82,9 +82,11 @@
 					        <tr class="strong">
 					          <td>Date</td>
 					          <td>Vehicle No</td>
-					          <td>Carrier</td>
+					          <td>Forwarder</td>
 					          <td class="text-right">Consignments</td>
-							  <td class="text-right">Amount</td>
+							  <td class="text-right">Gross</td>
+							  <td class="text-right">Delivery</td>
+							  <td class="text-right">Net</td>
 					         <td class="text-center"><i class="fas fa-bars"></td>
 					        </tr>
 					    </thead>
@@ -93,21 +95,19 @@
 					        <tr>
 					            <td>{{$container->created_at->toDateString()}}</td>
 					            <td>{{$container->vehicleNo}}</td>
-					            <td>{{$container->carrierName}}</td>
+					            <td>{{$container->forwarder->name}}</td>
 								<td class="text-right">{{$container->consignments->count()}}</td>
-								<td class='text-right'>{{$container->getTotal()}}</td>
-					            <form action="{{ route('containers.destroy', $container->id)}}" method="post" onsubmit="return confirm('Are you sure?')" class="p-0 m-0">
-								<td class='text-center'>
-									
-									<a href="{{ route('containers.show', $container->id)}}" class='btn btn-sm btn-link text-info'><b><i class="fa fa-eye"></b></i></a>
-
-									<a href="{{ route('containers.edit', $container->id)}}" class='btn btn-sm btn-link text-success'><i class="fas fa-pen"></i></a>
-					            	
-					            	@csrf
-									@method('DELETE')
-									<button class="btn btn-sm btn-link text-danger" type="submit"><i class="far fa-trash-alt"></i></button>
-									
-								</td>
+								<td class='text-right'>{{$container->getSubTotalOne()}}</td>
+								<td class='text-right'>{{$container->getSubTotalOne()*0.05}}</td>
+								<td class='text-right'>{{$container->getSubTotalOne()*0.95}}</td>
+					         <form action="{{ route('containers.destroy', $container->id)}}" method="post" onsubmit="return confirm('Are you sure?')" class="p-0 m-0">
+									<td class='text-center'>
+										<a href="{{ route('containers.show', $container->id)}}" class='btn btn-sm btn-link text-info'><b><i class="fa fa-eye"></b></i></a>
+										<a href="{{ route('containers.edit', $container->id)}}" class='btn btn-sm btn-link text-success'><i class="fas fa-pen"></i></a>
+										@csrf
+										@method('DELETE')
+										<button class="btn btn-sm btn-link text-danger" type="submit"><i class="far fa-trash-alt"></i></button>
+									</td>
 								</form> 
 					        </tr>
 					        @endforeach
@@ -132,6 +132,7 @@
 	        	
 	        	if($(this).children().eq(0).text().toLowerCase().includes(txt)
 	        		||$(this).children().eq(1).text().toLowerCase().includes(txt)
+					||$(this).children().eq(2).text().toLowerCase().includes(txt)
 	        		)
 	          		$(this).show();
 	        	else

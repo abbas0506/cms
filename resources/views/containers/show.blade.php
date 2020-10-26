@@ -79,7 +79,7 @@
 					<div class="row no-gutters">
 					 	<div class="col-sm-4 offset-sm-8 my-auto">
 					 		<i class="fas fa-search text-secondary icon-l"></i>
-					 		<input type="text" id="filter" class="form-control text-center round" placeholder="Type bilty no.">
+					 		<input type="text" id="filter" class="form-control text-center round" placeholder="Search here">
 					 	</div>
 					 
 					</div>
@@ -106,10 +106,12 @@
 									<tr class="strong">
 										<td>Sr.</td>
 										<td>Bilty No.</td>
-										<td>Consigner</td>
+										<td>Consignee</td>
 										<td>Items</td>
 										<td>Description</td>
-										<td>Amount</td>
+										<td>Sub-1</td>
+										<td>Sub-2</td>
+										<td>G.Total</td>
 										<td>Status</td>
 										<td class="text-center"><i class="fas fa-bars"></i></td>
 									</tr>
@@ -120,9 +122,11 @@
 										<td class='hidden'>{{$consignment->id}}</td>
 										<td>{{$sr++}}</td>
 										<td>{{$consignment->biltyNo}}</td>
-										<td>{{$consignment->consigner->name}}</td>
+										<td>{{$consignment->consignee->name}}</td>
 										<td>{{$consignment->nItems}}</td>
 										<td>{{$consignment->description}}</td>
+										<td>{{$consignment->getSubTotalOne()}}</td>
+										<td>{{$consignment->getSubTotalTwo()}}</td>
 										<td>{{$consignment->getTotal()}}</td>
 										<td>
 											@if($consignment->getStatus()=='Pending')
@@ -329,7 +333,7 @@
 		$("#filter").on("keyup", function() {
 	      	var txt = $(this).val().toLowerCase();
 	      	$("table tbody tr").each(function() {
-	        	if($(this).children().eq(2).text().toLowerCase().includes(txt)||$(this).children().eq(4).text().toLowerCase().includes(txt))
+	        	if($(this).children().eq(2).text().toLowerCase().includes(txt)||$(this).children().eq(3).text().toLowerCase().includes(txt))
 	          		$(this).show();
 	        	else
 	          		$(this).hide();

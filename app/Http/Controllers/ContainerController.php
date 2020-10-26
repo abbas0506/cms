@@ -17,11 +17,11 @@ class ContainerController extends Controller
      *
      * @return \Illuminate\Http\Response
     */
-    public function index($mode=5)
+    public function index($mode=10)
     {
                 
-        if($mode==5){
-            $containers=Container::limit(5)->get();
+        if($mode==10){
+            $containers=Container::limit(10)->orderBy('id','desc')->get();
             return view('containers.index',compact('containers','mode'));
         }
         else{
