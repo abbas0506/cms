@@ -48,50 +48,53 @@
          <div class="col">
             <div class="row no-gutters justify-content-center">
                <div class="col-sm-8 shadow-lg p-4">
-               <form method="post" action="{{ route('containers.store') }}">
-        @csrf
-        <div class="row no-gutters form-group">    
-            
-            <div class="col-sm-2 pr-2">
-                <label for="name">Vehicle No. *</label>
-                <input type="text" class="form-control" name="vehicleNo" placeholder='Vehicle No.' required>
-            </div>
-            
-            <div class="col-sm-5 pr-2">
-                <label for="name">Forwarder * <a href='#' data-toggle='modal' data-target='#createModal' class="txt-s ml-3" >New</a></label>
-          
-                <select name="forwarderId" class="form-control" required>
-                <option value=''>Select a forwarder</option>
-                @foreach ($forwarders as $forwarder)      
-                  <option value='{{$forwarder->id}}'>{{$forwarder->name}}</option>
-                @endforeach
-              </select>
-            </div>
-        </div>
-          
-        <div class="row no-gutters form-group">    
-            
-            <div class="col-sm-7 pr-2">
-                <label for="name">Carrier Name *</label>
-                <input type="text" class="form-control" name="carrierName" placeholder='Carrier name' pattern='[a-z A-Z]+' title='Name must contain characters only' required>
-            </div>
-              
-            <div class="col-sm-5">
-                <label for="carrierPhone">Carrier Phone</label>
-                <input type="text" class="form-control" name="carrierPhone" placeholder="0xxxxxxxxxx" autocomplete='off' pattern='0[0-9]{10}'>
-                <div class="form-group text-center hidden p-0 m-0" id='carrier_phone_sub'></div>
+                <form method="post" action="{{ route('containers.store') }}">
+                  @csrf
+                  <div class="row no-gutters form-group">    
+                      
+                      <div class="col-sm-2 pr-2">
+                          <label for="name">Vehicle No. *</label>
+                          <input type="text" class="form-control" name="vehicleNo" placeholder='Vehicle No.' required>
+                      </div>
+                      
+                      <div class="col-sm-5 pr-2">
+                          <label for="name">Forwarder * <a href='#' data-toggle='modal' data-target='#createModal' class="txt-s ml-3" >New</a></label>
+                    
+                          <select name="forwarderId" class="form-control" required>
+                          <option value=''>Select a forwarder</option>
+                          @foreach ($forwarders as $forwarder)      
+                            <option value='{{$forwarder->id}}'>{{$forwarder->name}}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                      <div class="col-sm-2 pr-2">
+                          <label for="name">Comm. (%)*</label>
+                          <input type="text" class="form-control text-center" name="commission" placeholder='Comm. Rate' value='5' required>
+                      </div>
+                  </div>
+                    
+                  <div class="row no-gutters form-group">    
+                      
+                      <div class="col-sm-7 pr-2">
+                          <label for="name">Carrier Name *</label>
+                          <input type="text" class="form-control" name="carrierName" placeholder='Carrier name' pattern='[a-z A-Z]+' title='Name must contain characters only' required>
+                      </div>
+                        
+                      <div class="col-sm-5">
+                          <label for="carrierPhone">Carrier Phone</label>
+                          <input type="text" class="form-control" name="carrierPhone" placeholder="0xxxxxxxxxx" autocomplete='off' pattern='0[0-9]{10}'>
+                          <div class="form-group text-center hidden p-0 m-0" id='carrier_phone_sub'></div>
 
-            </div>
-        </div>
-        
-        <div class="row no-gutters">    
-            <div class="col text-right">
-                <button type="submit" class="btn btn-success">Save</button>
-            </div>
-        </div>
-          
-    </form>
-				</div>   
+                      </div>
+                  </div>
+                  
+                  <div class="row no-gutters">    
+                      <div class="col text-right">
+                          <button type="submit" class="btn btn-success">Save</button>
+                      </div>
+                  </div>
+                </form>
+				      </div>   
             </div>
          </div>
       </div>

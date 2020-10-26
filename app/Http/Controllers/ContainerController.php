@@ -55,6 +55,7 @@ class ContainerController extends Controller
             'forwarderId' => 'required',
             'vehicleNo' => 'required',
             'carrierName' => 'required',
+            'commission' => 'required',
             
         ]);
         
@@ -63,6 +64,7 @@ class ContainerController extends Controller
             'vehicleNo' => Str::upper($request->get('vehicleNo')),
             'carrierName' => Str::title($request->get('carrierName')),
             'carrierPhone' => $request->get('carrierPhone'),
+            'commission' => $request->get('commission'),
            
         ]);
         
@@ -125,6 +127,7 @@ class ContainerController extends Controller
             
             'vehicleNo' => 'required',
             'carrierName' => 'required',
+            'commission' => 'required',
         ]);
         
         $container=Container::find($id);
@@ -136,6 +139,7 @@ class ContainerController extends Controller
         $container->vehicleNo = Str::upper($request->vehicleNo);
         $container->carrierName = Str::title($request->carrierName);
         $container->carrierPhone = $request->carrierPhone;
+        $container->commission = $request->commission;
         
         $container->save();
 

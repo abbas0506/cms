@@ -108,7 +108,7 @@
 					@foreach($mixedTransactions as $transaction)
 					<tr>
 						<td>{{++$sr}}</td>
-						<td>{{$transaction->created_at}}</td>
+						<td>{{$transaction->created_at->format('d/m/Y')}}</td>
 						<td>{{$transaction->description}}</td>
 						@if($transaction->tx==='cr')
 							<td>{{$transaction->amount}}</td>
@@ -165,7 +165,7 @@
 					@foreach($consignee->recoveries as $recovery)
 					<tr>
 						<td>{{++$sr}}</td>
-						<td>{{$recovery->created_at}}</td>
+						<td>{{$recovery->created_at->format('d/m/Y')}}</td>
 						<td>{{$recovery->description}}</td>
 						<td>{{$recovery->amount}}</td>
 						<form action="{{ route('recoveries.destroy', $recovery->id)}}" method="post" onsubmit="return confirm('Are you sure?')" class="p-0 m-0">
@@ -207,7 +207,7 @@
 					@foreach($consignee->consignments as $consignment)
 					<tr>
 						<td>{{++$sr}}</td>
-						<td>{{$consignment->created_at}}</td>
+						<td>{{$consignment->created_at->format('d/m/Y')}}</td>
 						<td>{{$consignment->biltyNo}}</td>
 						<td>{{$consignment->nItems}}</td>
 						<td>{{$consignment->description}}</td>

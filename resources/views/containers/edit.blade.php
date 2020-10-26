@@ -61,6 +61,10 @@
                               <label for="name">Forwarder</label>
                               <input class="form-control" readonly value="{{$container->forwarder->name}}">
                            </div>
+                           <div class="col-sm-2 pr-2">
+                              <label for="name">Comm. (%)*</label>
+                              <input type="text" class="form-control text-center" name="commission" placeholder='Comm. Rate' value="{{$container->commission}}" required>
+                           </div>
                      </div>
                         
                      <div class="row no-gutters form-group">    

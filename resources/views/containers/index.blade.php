@@ -68,7 +68,7 @@
       <div class="row no-gutters">
          <div class="col">
             <div class="row no-gutters justify-content-center">
-               <div class="col-sm-8">
+               <div class="col-sm-10">
 					<div class="row">
 					 	<div class="col-sm-4 my-auto">
 					 		<i class="fas fa-search text-secondary icon-l"></i>
@@ -80,26 +80,28 @@
 					<table class="table table-striped mt-2">
 					    <thead>
 					        <tr class="strong">
-					          <td>Date</td>
-					          <td>Vehicle No</td>
-					          <td>Forwarder</td>
-					          <td class="text-right">Consignments</td>
-							  <td class="text-right">Gross</td>
-							  <td class="text-right">Delivery</td>
-							  <td class="text-right">Net</td>
-					         <td class="text-center"><i class="fas fa-bars"></td>
-					        </tr>
+					          	<td>Date</td>
+					          	<td>Vehicle No</td>
+					          	<td>Forwarder</td>
+								 	<td class="text-right">Consignments</td>
+									<td class="text-right">Comm. (%)</td>
+							  		<td class="text-right">Gross</td>
+							  		<td class="text-right">Delivery</td>
+							  		<td class="text-right">Net Amount</td>
+					         	<td class="text-center"><i class="fas fa-bars"></td>
+					        	</tr>
 					    </thead>
 					    <tbody>
 					        @foreach($containers as $container)
 					        <tr>
-					            <td>{{$container->created_at->toDateString()}}</td>
+					            <td>{{$container->created_at->format('d/m/Y')}}</td>
 					            <td>{{$container->vehicleNo}}</td>
 					            <td>{{$container->forwarder->name}}</td>
 								<td class="text-right">{{$container->consignments->count()}}</td>
+								<td class="text-right">{{$container->commission}}</td>
 								<td class='text-right'>{{$container->getSubTotalOne()}}</td>
-								<td class='text-right'>{{$container->getSubTotalOne()*0.05}}</td>
-								<td class='text-right'>{{$container->getSubTotalOne()*0.95}}</td>
+								<td class='text-right'>{{$container->getDeliveryComm()}}</td>
+								<td class='text-right'>{{$container->getSubTotalOne()- $container->getDeliveryComm()}}</td>
 					         <form action="{{ route('containers.destroy', $container->id)}}" method="post" onsubmit="return confirm('Are you sure?')" class="p-0 m-0">
 									<td class='text-center'>
 										<a href="{{ route('containers.show', $container->id)}}" class='btn btn-sm btn-link text-info'><b><i class="fa fa-eye"></b></i></a>

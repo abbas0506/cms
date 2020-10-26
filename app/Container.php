@@ -12,7 +12,8 @@ class Container extends Model
     	'forwarderId',
         'vehicleNo',
     	'carrierName',
-    	'carrierPhone',
+        'carrierPhone',
+        'commission',
     	
     ];
 
@@ -37,6 +38,15 @@ class Container extends Model
             return $consignment->getTotal();
       
           });
+    }
+
+    public function getDeliveryComm(){
+        $sub1=$this->consignments->sum(function($consignment){
+            return $consignment->getSubTotalOne();
+      
+          });
+
+        return $sub1*$this->commission*0.01;
     }
 
     // find subtotal of all consignments of this container

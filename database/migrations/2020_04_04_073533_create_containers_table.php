@@ -19,6 +19,7 @@ class CreateContainersTable extends Migration
             $table->string('vehicleNo',10);
             $table->string('carrierName',50);
             $table->string('carrierPhone',11)->nullable();
+            $table->integer('commission')->unsigned();
             $table->timestamps();
                         
             $table->foreign('forwarderId')
