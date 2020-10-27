@@ -89,6 +89,9 @@ class BatchedRecoveryController extends Controller
     public function edit($id)
     {
         //
+        $recovery=Recovery::findOrFail($id);
+
+        return view('recovery.edit',compact('recovery'));
     }
 
     /**
@@ -101,6 +104,29 @@ class BatchedRecoveryController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $request->validate([
+            'amount' => 'required',
+        ]);
+        
+        $recovery=Recovery::findOrFail($id);
+        $consignee=Consignee::findOrFail($recovery->consignee->id);
+        $preAmount=$recovery->amount;
+        $recovery->amount=$request->amount;
+        $recovery->description=$request->description;
+        
+        $recovery->save();
+
+        //create log
+        $log= new Log();
+        $log->operation="UPD";
+        $log->description="Recovery was updated. Consignee ".$consignee->name.", from: ".$preAmount." to ".$recovery->amount;
+        
+        $log->save();
+
+        $batch=Batch::find($recovery->batchId);
+        $consignees=Consignee::all();
+        return view('batches.show',compact('batch','consignees'));   //show recoveries of current consignee
+ 
     }
 
     /**

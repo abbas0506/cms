@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Batch;
 use App\Consignee;
+use App\Log;
 use Illuminate\Http\Request;
 
 class BatchController extends Controller
@@ -16,7 +17,6 @@ class BatchController extends Controller
     {
         //
         $batches=Batch::orderByDesc('id')->get();
-        //$recoveries=Recovery::selectRaw('batchId, sum(amount) as amount')->groupBy('created_at','batchId')->get();
         return view('batches.index',compact('batches'));
 
     }
@@ -96,5 +96,19 @@ class BatchController extends Controller
     public function destroy($id)
     {
         //
+        $batch=Batch::findOrFail($id);
+        $batchId=$batch->id;
+        $amount=$batch->getTotal();
+        $batch->delete();
+
+        //create log
+        $log= new Log();
+        $log->operation="DEL";
+        $log->description="Bacth ".$batchId." was deleted: amount= ".$amount;
+
+        $log->save();
+
+        $batches=Batch::orderByDesc('id')->get();
+        return view('batches.index',compact('batches'));
     }
 }

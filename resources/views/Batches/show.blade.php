@@ -7,7 +7,7 @@
             <nav aria-label="breadcrumb">
                <ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="{{url('user-home')}}">Home</a></li>
-						<li class="breadcrumb-item"><a href="{{route('batches.index')}}">Batch</a></li>
+						<li class="breadcrumb-item"><a href="{{route('batches.index')}}">Batches</a></li>
                   <li class="breadcrumb-item active" aria-current="page">{{$batch->id}}</li>
                </ol>
            </nav>
@@ -40,12 +40,16 @@
       <br />
       @endif
       @php
-         $sr=1;
+         $sr=0;
       @endphp
       <div class="row no-gutters">
          <div class="col">
 				<div class="row no-gutters justify-content-center">
                <div class="col-sm-8">
+						<div class="row no-gutters justify-content-center mb-2">
+							<div class="col-sm-6 brown ">Dated: {{$batch->created_at->format('d/m/Y')}}</div>
+							<div class="col-sm-6 txt-lb teal">Amount: {{$batch->getTotal()}}</div>
+						</div>
 						<div class="row">
 							<table class="table table-striped">
 								<thead>
@@ -90,7 +94,7 @@
 
 @section('modal-section')
 	<!----------------------------------------------------------------------------
-									Create Payment modal
+									New Recovery modal
 	------------------------------------------------------------------------------>
 
 	<!-- Insert class Modal -->
@@ -109,8 +113,9 @@
 					<form  method="post" action="{{route('batchedRecoveries.store')}}">
 					@csrf
 						<div class="row no-gutters form-group">    
-							<div class="col-sm-2 pr-2">
+							<div class="col-sm-4 pr-2">
 								<input type="text" name='batchId' value='{{$batch->id}}' hidden >  
+								<label for="consignee">Select a consignee *</label>
 								<select name="consigneeId" class="form-control" required>
 									<option value=''>Select a consignee</option>
 									@foreach ($consignees as $consignee)      
@@ -120,11 +125,11 @@
 							</div>
 							
 							<div class="col-sm-2 pr-2">
-							<label for="amount">Amount *</label>
-							<input type="text" class="form-control" name="amount" autocomplete='off' pattern='[0-9]{1,5}([.][0-9]{1,5}){0,1}' placeholder="amount" required>
+								<label for="amount">Amount *</label>
+								<input type="text" class="form-control" name="amount" autocomplete='off' pattern='[0-9]{1,5}([.][0-9]{1,5}){0,1}' placeholder="amount" required>
 
 							</div>
-							<div class="col-sm-10 ">
+							<div class="col-sm-6 ">
 							<label for="phone">Description</label>
 							<input type="text" class="form-control" name="description" autocomplete='off'>
 							</div>

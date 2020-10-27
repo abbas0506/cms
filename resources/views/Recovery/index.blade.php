@@ -7,7 +7,7 @@
             <nav aria-label="breadcrumb">
                <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="{{url('user-home')}}">Home</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Recovery List</li>
+                  <li class="breadcrumb-item active" aria-current="page">Accounts List</li>
                </ol>
            </nav>
          </div>
@@ -16,24 +16,12 @@
             <div class="col text-center">
             	<a href="{{route('containers.create')}}">
                   <div class="icon-xl text-success"><i class="fa fa-print"></i></div>
-                  <div class="micro">Print Recovery List</div>
+                  <div class="micro">Print Account Summary</div>
 					</a>
 				</div>
          </div>
 		</div>
-		
-		<div class="col-md-2 text-center">
-         <div class="row no-gutters">
-            <div class="col text-center">
-            	<a href="{{route('batches.create')}}">
-                  <div class="icon-xl text-success"><i class="fa fa-plus"></i></div>
-                  <div class="micro">Create Batch</div>
-					</a>
-				</div>
-         </div>
-		</div>
-		
-   </div>
+	</div>
 </section>
 @endsection
 
@@ -70,7 +58,7 @@
 					<div class="row">
 					 	<div class="col-sm-4 my-auto">
 					 		<i class="fas fa-search text-secondary icon-l"></i>
-					 		<input type="text" id="filter" class="form-control text-center round" placeholder="Type consignee name">
+					 		<input type="text" id="filter" class="form-control text-center round" placeholder="Search here">
 					 	</div>
 					 
 					</div>
@@ -97,8 +85,6 @@
 									
 								<td class='text-center'>
 									<a href="{{route('recoveries.show', $consignee->id)}}" class='btn btn-sm btn-link text-info'><i class="far fa-eye"></i></a>
-									<a href="#" class='btn btn-sm btn-link text-danger'><i class="fas fa-history"></i></a>
-										
 								</td>
 								
 							</tr>

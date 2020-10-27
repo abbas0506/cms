@@ -7,9 +7,7 @@
             <nav aria-label="breadcrumb">
                <ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="{{url('user-home')}}">Home</a></li>
-						<li class="breadcrumb-item"><a href="{{route('recoveries.index')}}">Recovery List</a></li>
-						<li class="breadcrumb-item"><a href="{{route('recoveries.show', $recovery->consignee->id)}}">{{$recovery->consignee->name}}</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Edit Recovery</li>
+						<li class="breadcrumb-item active" aria-current="page">Edit Recovery</li>
                </ol>
            </nav>
          </div>
@@ -38,15 +36,21 @@
          <div class="col">
             <div class="row no-gutters justify-content-center">
                <div class="col-sm-8 shadow-lg p-4">
-						<form  method="post" action="{{route('recoveries.update', $recovery->id)}}">
+						<form  method="post" action="{{route('batchedRecoveries.update', $recovery->id)}}">
 							@csrf
 							@method('PATCH')
 							<div class="row no-gutters form-group">    
-								<div class="col-sm-2 pr-2">
+                        <div class="col-sm-4 pr-2">
+                           <label for="consignee">Consignee *</label>
+                           <input type="text" class="form-control" name="consigneeId" autocomplete='off' pattern='[0-9]{1,5}([.][0-9]{1,5}){0,1}' placeholder="amount" required readonly value='{{$recovery->consignee->name}}'>
+
+                        </div>
+                     
+                        <div class="col-sm-2 pr-2">
 									<label for="amount">Amount *</label>
 									<input type="text" class="form-control" name="amount" autocomplete='off' pattern='[0-9]{1,5}([.][0-9]{1,5}){0,1}' placeholder="amount" required value='{{$recovery->amount}}'>
 									</div>
-								<div class="col-sm-10 ">
+								<div class="col-sm-6 ">
 									<label for="phone">Description</label>
 									<input type="text" class="form-control" name="description" autocomplete='off' value='{{$recovery->description}}' placeholder="In words">
 								</div>

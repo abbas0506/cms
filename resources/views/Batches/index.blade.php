@@ -7,7 +7,7 @@
             <nav aria-label="breadcrumb">
                <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="{{url('user-home')}}">Home</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Batches</li>
+                  <li class="breadcrumb-item active" aria-current="page">Recovery Batches</li>
                </ol>
            </nav>
          </div>
@@ -58,7 +58,7 @@
 						<div class="row">
 							<div class="col-sm-4 my-auto">
 								<i class="fas fa-search text-secondary icon-l"></i>
-								<input type="text" id="filter" class="form-control text-center round" placeholder="Type consignee name">
+								<input type="text" id="filter" class="form-control text-center round" placeholder="Search here">
 							</div>
 						
 						</div>
@@ -67,9 +67,9 @@
 							<thead>
 								<tr class="strong">
 									<td>Date</td>
-									<td>Batch</td>
-									<td>#</td>
-									<td>Amount</td>
+									<td class="text-right">Batch ID</td>
+									<td class="text-right">No. of Rec.</td>
+									<td class="text-right">Amount</td>
 									<td class="text-center"><i class="fas fa-bars"></td>
 								</tr>
 							</thead>
@@ -77,15 +77,18 @@
 								@foreach($batches as $batch)
 								<tr>
 									<td>{{$batch->created_at->format('d/m/Y')}}</td>
-									<td>{{$batch->id}}</td>
-									<td>{{$batch->recoveries->count()}}</td>
-									<td>{{$batch->getTotal()}}</td>
+									<td class="text-right">{{$batch->id}}</td>
+									<td class="text-right">{{$batch->recoveries->count()}}</td>
+									<td class="text-right">{{$batch->getTotal()}}</td>
 										
-									<td class='text-center'>
-										<a href="{{route('batches.show', $batch->id)}}" class='btn btn-sm btn-link text-info'><i class="far fa-eye"></i></a>
-										<a href="#" class='btn btn-sm btn-link text-danger'><i class="fas fa-history"></i></a>
-											
-									</td>
+									<form action="{{ route('batches.destroy', $batch->id)}}" method="post" onsubmit="return confirm('Are you sure?')" class="p-0 m-0">
+										<td class='text-center'>
+											<a href="{{route('batches.show', $batch->id)}}" class='btn btn-sm btn-link text-info'><i class="far fa-eye"></i></a>
+											@csrf
+											@method('DELETE')
+											<button class="btn btn-sm btn-link text-danger" type="submit"><i class="far fa-trash-alt"></i></button>
+										</td>
+									</form>
 									
 								</tr>
 								@endforeach

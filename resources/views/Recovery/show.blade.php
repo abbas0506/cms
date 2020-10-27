@@ -7,7 +7,7 @@
             <nav aria-label="breadcrumb">
                <ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="{{url('user-home')}}">Home</a></li>
-						<li class="breadcrumb-item"><a href="{{route('recoveries.index')}}">Recovery List</a></li>
+						<li class="breadcrumb-item"><a href="{{route('recoveries.index')}}">Accounts List</a></li>
                   <li class="breadcrumb-item active" aria-current="page">{{$consignee->name}}</li>
                </ol>
            </nav>
@@ -16,8 +16,8 @@
          <div class="row no-gutters">
             <div class="col text-center">
             	<a href="#" data-toggle="modal" data-target="#newRecovery">
-						<div class="icon-xl text-success"><i class="fa fa-plus-circle"></i></div>
-                  <div class="micro">New Recovery</div>
+						<div class="icon-xl text-success"><i class="fa fa-print"></i></div>
+                  <div class="micro">Print Account</div>
                </a>
             </div>
          </div>
