@@ -18,11 +18,17 @@ class CreateRecoveriesTable extends Migration
             $table->unsignedInteger('consigneeId');
             $table->unsignedInteger('amount');
             $table->string('description', 100)->nullable();
+            $table->unsignedInteger('batchId');
 
             $table->foreign('consigneeId')
                 ->references('id')
                 ->on('consignees')
                 ->onUpdate('cascade')
+                ->onDelete('cascade');
+
+            $table->foreign('batchId')
+                ->references('id')
+                ->on('batches')
                 ->onDelete('cascade');
 
             $table->timestamps();

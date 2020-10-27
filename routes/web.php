@@ -45,7 +45,9 @@ Route::group(['middleware'=>'admin'], function(){
 	Route::resource('containers', 'ContainerController');
 	Route::resource('consignments', 'ConsignmentController');
 	Route::resource('payments', 'PaymentController');
-	Route::resource('recoveries', 'RecoveryController');
+	Route::resource('recoveries', 'RecoveryController');	
+	Route::resource('batches', 'BatchController');
+	Route::resource('batchedRecoveries', 'BatchedRecoveryController');
 //});
 
 Route::get('signout','UserController@signout')->name('signout');

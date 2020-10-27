@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
 use App\Consignee;
 use App\Recovery;
+use App\Batch;
 use App\Log;
 
-class RecoveryController extends Controller
+use Illuminate\Http\Request;
+
+class BatchedRecoveryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +18,6 @@ class RecoveryController extends Controller
     public function index()
     {
         //
-        $consignees=Consignee::orderBy('name')->get();
-        return view('recovery.index',compact('consignees'));
     }
 
     /**
@@ -29,6 +28,7 @@ class RecoveryController extends Controller
     public function create()
     {
         //
+
     }
 
     /**
@@ -56,18 +56,17 @@ class RecoveryController extends Controller
         
         $recovery->save();
 
-        $consignee=Consignee::findOrFail($recovery->consignee->id);
-
         //create log
         $log= new Log();
         $log->operation="ADD";
+        $consignee=Consignee::find($request->consigneeId);
         $log->description="Recovery was made from consignee. ".$consignee->name.", amount: ".$recovery->amount;
 
         $log->save();
         
-        $consignee=Consignee::find($request->consigneeId);
-        return redirect('recoveries/'.$recovery->consignee->id);    //show recoveries of current consignee
-        
+        $batch=Batch::find($request->batchId);
+        $consignees=Consignee::all();
+        return view('batches.show',compact('batch','consignees'));   //show recoveries of current consignee
     }
 
     /**
@@ -79,21 +78,6 @@ class RecoveryController extends Controller
     public function show($id)
     {
         //
-        $consignee=Consignee::find($id);
-        $recoveries=$consignee->recoveries()->selectRaw("created_at, description, amount, 'db' as 'tx'");
-        $mixedTransactions=$consignee->consignments()->selectRaw("created_at, description, vehicleCharges+
-                loadOneCharges+
-                biltyOneCharges+
-                insurance+
-                cartOneCharges+
-                otherCharges+
-                unloadCharges+
-                biltyTwoCharges+
-                cartTwoCharges+
-                loadTwoCharges as amount, 'cr' as 'tx'" )->union($recoveries)->orderByDesc('created_at')->limit(8)->get();
-        
-        
-        return view('recovery.show',compact('consignee','mixedTransactions'));
     }
 
     /**
@@ -105,9 +89,6 @@ class RecoveryController extends Controller
     public function edit($id)
     {
         //
-        $recovery=Recovery::findOrFail($id);
-        return view('recovery.edit',compact('recovery'));
-
     }
 
     /**
@@ -120,28 +101,6 @@ class RecoveryController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $request->validate([
-            'amount' => 'required',
-        ]);
-        
-        $recovery=Recovery::findOrFail($id);
-        $consignee=Consignee::findOrFail($recovery->consignee->id);
-        $preAmount=$recovery->amount;
-        $recovery->amount=$request->amount;
-        $recovery->description=$request->description;
-        
-        $recovery->save();
-
-        //create log
-        $log= new Log();
-        $log->operation="UPD";
-        $log->description="Recovery was updated. Consignee ".$consignee->name.", from: ".$preAmount." to ".$recovery->amount;
-        
-        $log->save();
-
-        return redirect('recoveries/'.$recovery->consignee->id);
-        
-
     }
 
     /**
@@ -153,9 +112,10 @@ class RecoveryController extends Controller
     public function destroy($id)
     {
         //
+
         $recovery=Recovery::findOrFail($id);
         $consignee=Consignee::findOrFail($recovery->consignee->id);
-        
+        $batchId=$recovery->batchId;
         $amount=$recovery->amount;  //for log entry
        
         $recovery->delete();
@@ -167,7 +127,9 @@ class RecoveryController extends Controller
 
         $log->save();
 
-        return redirect('recoveries/'.$consignee->id);
+        $batch=Batch::find($batchId);
+        $consignees=Consignee::all();
+        return view('batches.show',compact('batch','consignees'));   //show recoveries of current consignee
 
     }
 }

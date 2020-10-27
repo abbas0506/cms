@@ -12,7 +12,8 @@ class Recovery extends Model
     	'id',
     	'consigneeId',
     	'amount', 
-    	'description', 
+        'description',
+        'batchId', 
     	
 	];
 	
