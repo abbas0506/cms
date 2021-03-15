@@ -12,6 +12,7 @@
                   <li class="breadcrumb-item"><a href="{{route('containers.show', $container->id)}}">{{$container->vehicleNo}}</a></li>
                   <li class="breadcrumb-item active" aria-current="page">New Consignment</li>
                </ol>
+               <!-- sdjlasdj -->
             </nav>
         </div>
     </div>
